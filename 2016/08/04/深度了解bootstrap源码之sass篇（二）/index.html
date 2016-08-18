@@ -1,0 +1,693 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（二）">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/深度了解bootstrap源码之sass篇（二）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
+<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg">
+<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var2.jpg">
+<meta property="og:updated_time" content="2016-08-04T10:27:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（二）">
+<meta name="twitter:description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
+<meta name="twitter:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（二） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T18:21:53+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。<br><a id="more"></a></p>
+<h2 id="变量声明方式"><a href="#变量声明方式" class="headerlink" title="变量声明方式"></a>变量声明方式</h2><ul>
+<li><p>变量命名规范<br>所有变量声明是以<strong>描述 - 场景 - 尺寸 - 基线</strong>从左至右的先后顺 序决定。<br>例如：<br>变量<code>$alert-success-bg</code>  <em>(框架警示框组件没有大小尺寸)</em><br>alert：警示框<br>success：场景为成功时<br>bg：背景色</p>
+<p>再举个栗子，变量：<code>$padding-large-vertical</code><br>padding：内边距<br>large：大尺寸<br>vertical：基线(y轴,代表padding-top和padding-bottom)</p>
+</li>
+</ul>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ul>
+<li>全局属性：公共属性的变量，用于组件全局属性的变量。</li>
+<li>组件变量块：公共代码块所需要的属性变量，尺寸和场景的变量。<br>以下是我画的结构图：<br><img src="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg" alt="sass架构示意图"><br><img src="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var2.jpg" alt="sass架构示意图"></li>
+</ul>
+<p>以上包含了_variables全部变量属性，以及结构说明。<br><em>注：</em></p>
+<ul>
+<li><em>鼠标行为：link,hover,active</em></li>
+<li><em>鼠标点击：active</em></li>
+<li><em>鼠标悬停：hover</em></li>
+<li><em>其它：暂不明</em></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/29/深度了解bootstrap源码之sass篇（一）/" rel="next" title="深度了解bootstrap源码之sass篇（一）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2016/08/04/深度了解bootstrap源码之sass篇（二）/" data-title="深度了解bootstrap源码之sass篇（二）" data-url="http://yoursite.com/2016/08/04/深度了解bootstrap源码之sass篇（二）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明方式"><span class="nav-number">2.</span> <span class="nav-text">变量声明方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构"><span class="nav-number">3.</span> <span class="nav-text">结构</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于bootstrap框架里media类的解析">
+<meta property="og:url" content="http://yoursite.com/2016/07/27/关于bootstrap框架里media类的解析/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
+<meta property="og:updated_time" content="2016-07-29T12:26:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于bootstrap框架里media类的解析">
+<meta name="twitter:description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 关于bootstrap框架里media类的解析 | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于bootstrap框架里media类的解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T20:11:34+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。<br><a id="more"></a><br>bs完整的_media.scss类是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">.media &#123;</div><div class="line">  // Proper spacing between instances of .media</div><div class="line">  margin-top: 15px;</div><div class="line"></div><div class="line">  &amp;:first-child &#123;</div><div class="line">    margin-top: 0;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media,</div><div class="line">.media-body &#123;</div><div class="line">  zoom: 1;</div><div class="line">  overflow: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-body &#123;</div><div class="line">  width: 10000px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-object &#123;</div><div class="line">  display: block;</div><div class="line"></div><div class="line">  // Fix collapse in webkit from max-width: 100% and display: table-cell.</div><div class="line">  &amp;.img-thumbnail &#123;</div><div class="line">    max-width: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-right,</div><div class="line">.media &gt; .pull-right &#123;</div><div class="line">  padding-left: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-left,</div><div class="line">.media &gt; .pull-left &#123;</div><div class="line">  padding-right: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-left,</div><div class="line">.media-right,</div><div class="line">.media-body &#123;</div><div class="line">  display: table-cell;</div><div class="line">  vertical-align: top;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-middle &#123;</div><div class="line">  vertical-align: middle;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-bottom &#123;</div><div class="line">  vertical-align: bottom;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Reset margins on headings for tighter default spacing</div><div class="line">.media-heading &#123;</div><div class="line">  margin-top: 0;</div><div class="line">  margin-bottom: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Media list variation</div><div class="line">//</div><div class="line">// Undo default ul/ol styles</div><div class="line">.media-list &#123;</div><div class="line">  padding-left: 0;</div><div class="line">  list-style: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最先令我疑惑的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.media-body &#123;</div><div class="line">  width: 10000px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为什么要设置这么大的宽度呢？意义在哪？百度无果，我寻问了前辈豪大(豪情)，得到线索<a href="http://stackoverflow.com/questions/37178475/why-does-media-body-class-in-bootstrap-have-width-10-000px-and-media-class-have" target="_blank" rel="external">stackoverflow</a>。<br>又挑战我4级未过的英文水平了。。借助有道，我整理了一下提问和回答</p>
+<h3 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h3><blockquote>
+<p>Why does media-body class in bootstrap have width 10,000px and media class have overflow hidden and zoom 1?</p>
+</blockquote>
+<p>  翻译：<br>  <strong>在bootstrap框架里为什么<code>media-body</code>样式含有<code>width:10000px</code>和<code>media</code>样式含有<code>overflow:hidden</code>,<code>zoom:1</code>？</strong></p>
+<blockquote>
+<p>I have some question regarding the media classes in bootstrap.</p>
+<blockquote>
+<ol>
+<li>Why does .media-body class in bootstrap have width 10,000px? Why did they use display: table-cell not display: block?</li>
+<li>Why is overflow: hidden and zoom: 1used on .media class?</li>
+<li>Why doesn’t the div with .media-body actually take 10,000px width?</li>
+<li>What would happen if overflow: hidden and zoom: 1 are not used in .media class?</li>
+</ol>
+</blockquote>
+<p>As for my effort, I removed overflow, zoom and 10,000px width and observed no difference.</p>
+</blockquote>
+<p>翻译：<br><strong>我有一些关于bs框架里media类的问题。</strong><br><strong>1.  为什么.media-body的宽为10000px,为什么是display:tall-cell而不是block?</strong><br><strong>2. 为什么.media用了zoom:1和overflow:hideen？</strong><br><strong>3. 为什么实际上div的宽度不是.media-body设置的10000px？</strong><br><strong>4. 如果不设置over-flow:hidden和zoom:1将会发生什么？</strong><br><strong>经过实践后，我删除over-flow:hidden和zoom:1和width:10000px观察到并没有什么改变。</strong><br>大致是这个意思QAQ有没有英语好点的指导指导……</p>
+<h3 id="回答"><a href="#回答" class="headerlink" title="回答"></a>回答</h3><blockquote>
+<p>I have found some comments in the collection “Responsive Bootstrap”:</p>
+<blockquote>
+<ol>
+<li>Create new block formatting context in modern browsers</li>
+<li>Avoid shrink-wrap behaviour of table-cell</li>
+<li>Override for IE6/7</li>
+<li>Create new block formatting context in IE6/7<br>  Alternatively, use ‘overflow:hidden’ if clipping is OK<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">display: table-cell; /* 1 */</div><div class="line">width: 10000px; /* 2 */</div><div class="line">@include old-ie() &#123;</div><div class="line">    *width: auto; /* 3 */</div><div class="line">    *zoom: 1; /* 4 */</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>zoom is a hack for IE6 and IE7. All browsers ignore attributes that begin with an asterisk. Only IE7 and below takes them into account.</p>
+</blockquote>
+<p>翻译：<br><strong>我收集到一些关于“bs响应”的回复：</strong><br><strong>1. <code>display: table-cell;</code>在新版本浏览器可触发BFC（块级格式化上下文），如果不知道什么是BFC，可以百度或者看我的前一篇文章<a href="u-hey.github.io/2016/05/12/overflow-hidden">overflow:hidden</a></strong><br><strong>2.  <code>width:10000px</code>能避免设置<code>table-cell</code>的盒子变型 (因为在IE6/7不支持<code>table-cell</code>属性，且浏览器对<code>table-cell</code>属性展现不一)</strong><br><strong>3.  <code>width:auto</code>在IE6/7中形同于重写/覆盖。（*width是IE8下的hack技术）</strong><br><strong>4.  <code>zoom:1</code>能在IE6/7中触发BFC</strong><br><strong>使用<code>overflow:hidden</code>能恰到好处的隐藏溢出样式。</strong></p>
+<p><code>zoom:1</code> 是IE6/7的hack技巧，所有浏览器都会忽略这个属性除了IE6/7.</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>看来为了善用<code>table-cell</code>，Twitter大牛们又给我上了一课。<br>这里为了求证以上答案的真实性，我去拜访了张鑫旭前辈的博客，了解<a href="http://www.zhangxinxu.com/wordpress/2010/10/%E6%88%91%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E7%A7%8Ddisplaytable-cell%E7%9A%84%E5%BA%94%E7%94%A8/" target="_blank" rel="external">table-cell</a>。<br>在之前，我对table-cell属性仅仅停留在<strong>表单元形式展现</strong>的印象里，通俗理解，设置<code>display:table-cell</code>的盒子形式上会变成<code>&lt;table&gt;</code>，所以其子元素都会变成表单元，形同于<code>&lt;td&gt;</code>或<code>&lt;tr&gt;</code>。但由于IE6/7的不支持，所以设置其父元素需要配合<code>overflow:hidden</code>,<code>zoom:1</code>用于避免盒子塌陷，和触发BFC。而<code>*width:10000px</code>多余的宽度也恰到好处的被父元素隐藏。<br>所以<code>table-cell</code>有很高的使用价值，如：</p>
+<ul>
+<li>大小不固定元素的垂直居中，<em>在对图片垂直居中时，<code>img</code>标签应被<code>&lt;a&gt;</code>标签包裹。</em>(父table-cell + 父子vertical-align + 子inline-block)</li>
+<li>两栏自适应布局(兄弟flout + 兄弟table-cell)</li>
+<li>等高布局(父table-row + 子table-cell)</li>
+<li>列表布局(同上 + 子width)</li>
+</ul>
+<p><em>(父：指父元素，子：指子元素，兄弟：相邻元素)</em></p>
+<p>超实用有木有，日常写demo都遇的上。<br>系统提示：恭喜玩家uhey技能提升10个点！</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/16/ife-task002-学习记录/" rel="next" title="ife-task002 学习记录">
+                <i class="fa fa-chevron-left"></i> ife-task002 学习记录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/29/深度了解bootstrap源码之sass篇（一）/" rel="prev" title="深度了解bootstrap源码之sass篇（一）">
+                深度了解bootstrap源码之sass篇（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2016/07/27/关于bootstrap框架里media类的解析/" data-title="关于bootstrap框架里media类的解析" data-url="http://yoursite.com/2016/07/27/关于bootstrap框架里media类的解析/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#提问"><span class="nav-number">1.</span> <span class="nav-text">提问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回答"><span class="nav-number">2.</span> <span class="nav-text">回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,990 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（一）">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/深度了解bootstrap源码之sass篇（一）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
+<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg">
+<meta property="og:updated_time" content="2016-07-29T12:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（一）">
+<meta name="twitter:description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
+<meta name="twitter:image" content="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（一） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T20:25:15+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>框架版本：3.3.5<br>下载项目：Sass<br>路径：assets/stylesheets/bootstrap/</p>
+<a id="more"></a>
+<hr>
+<h2 id="sass架构和文件说明"><a href="#sass架构和文件说明" class="headerlink" title="sass架构和文件说明"></a>sass架构和文件说明</h2><p><img src="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg" alt="sass架构示意图"></p>
+<h3 id="初步了解"><a href="#初步了解" class="headerlink" title="初步了解"></a>初步了解</h3><p>架构图解说：mixins文件包里放置已写好的<strong>函数</strong>、对应各个组件的<strong>样式属性与方法</strong>、其中包括<strong>兼容处理</strong>、<strong>浏览器默认样式清除</strong>，<strong>多端响应处理</strong>等。<br>bootatrap文件包里除了mixins以外还有各组件，比如按钮、表单、布局、列表等，其中框架的所有变量也在_variable.scss中。</p>
+<p>bs是一个整体，mixins是每个部件所需要的材料，与mixins同级的sass文件则是各个封装完整的实例，可单独使用。</p>
+<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">文件名.scss</th>
+<th>文件说明(简述)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_alert</td>
+<td>警告框</td>
+</tr>
+<tr>
+<td style="text-align:left">_badges</td>
+<td>徽章</td>
+</tr>
+<tr>
+<td style="text-align:left">_breadcrumb</td>
+<td>面包屑</td>
+</tr>
+<tr>
+<td style="text-align:left">_btn-group</td>
+<td>按钮组</td>
+</tr>
+<tr>
+<td style="text-align:left">_buttons</td>
+<td>按钮</td>
+</tr>
+<tr>
+<td style="text-align:left">_carousel</td>
+<td>轮播</td>
+</tr>
+<tr>
+<td style="text-align:left">_close</td>
+<td>关闭按钮图标</td>
+</tr>
+<tr>
+<td style="text-align:left">_code</td>
+<td>代码块（samp,pre,kbd等）</td>
+</tr>
+<tr>
+<td style="text-align:left">_Component animations</td>
+<td>fade效果（常见如触发模态框时模态渐入效果）</td>
+</tr>
+<tr>
+<td style="text-align:left">_dropdowns</td>
+<td>下拉（可与导航、按钮组、列表标签配合使用，还可嵌套使用）</td>
+</tr>
+<tr>
+<td style="text-align:left">_forms</td>
+<td>表单（集合了单复选、图例、字段级、文本、输入框、标签、选择器等）</td>
+</tr>
+<tr>
+<td style="text-align:left">_glyphicon</td>
+<td>框架自带字体图标</td>
+</tr>
+<tr>
+<td style="text-align:left">_gird</td>
+<td>网格（row和container已经它们的自适应处理）</td>
+</tr>
+<tr>
+<td style="text-align:left">_input-group</td>
+<td>输入组（输入框与按钮、插件、图标的搭配）</td>
+</tr>
+<tr>
+<td style="text-align:left">_Jumbotron</td>
+<td>超大容器（官网首页那个大巨幕就是这货的杰作）</td>
+</tr>
+<tr>
+<td style="text-align:left">_label</td>
+<td>标签（与forms里的label不同在于，forms的lable侧重于信息选择，没有皮肤和尺寸。而这个侧重于信息传达，分皮肤和尺寸。）</td>
+</tr>
+<tr>
+<td style="text-align:left">_list-groups</td>
+<td>列表组（常见于面板内的列表信息）</td>
+</tr>
+<tr>
+<td style="text-align:left">_media</td>
+<td>媒体对象（常见于消息展示，留言评论）</td>
+</tr>
+<tr>
+<td style="text-align:left">_mixins</td>
+<td>打包mixins文件夹内的所有文件</td>
+</tr>
+<tr>
+<td style="text-align:left">_modals</td>
+<td>模态框</td>
+</tr>
+<tr>
+<td style="text-align:left">_navbar</td>
+<td>导航条（用于顶部或底部导航）</td>
+</tr>
+<tr>
+<td style="text-align:left">_navs</td>
+<td>导航组（用于菜单、tab选项卡）</td>
+</tr>
+<tr>
+<td style="text-align:left">_normalize</td>
+<td>文本标签规范（描述类文本）</td>
+</tr>
+<tr>
+<td style="text-align:left">_pager</td>
+<td>文本页（描述类文本）</td>
+</tr>
+<tr>
+<td style="text-align:left">_pagination</td>
+<td>分页</td>
+</tr>
+<tr>
+<td style="text-align:left">_panels</td>
+<td>面板与面板组</td>
+</tr>
+<tr>
+<td style="text-align:left">_popover</td>
+<td>弹出框</td>
+</tr>
+<tr>
+<td style="text-align:left">_print</td>
+<td>打印样式（包含h5样式规范和文档类标签规范）</td>
+</tr>
+<tr>
+<td style="text-align:left">_progress-bars</td>
+<td>进度条</td>
+</tr>
+<tr>
+<td style="text-align:left">_responsive-embed</td>
+<td>嵌入反应（对iframe,vedia,object等类嵌入的样式规范）</td>
+</tr>
+<tr>
+<td style="text-align:left">_responsive-utilities</td>
+<td>程序类嵌入响应式处理（含尺寸）</td>
+</tr>
+<tr>
+<td style="text-align:left">_scaffolding</td>
+<td>三方样式冲突处理（含多端处理）</td>
+</tr>
+<tr>
+<td style="text-align:left">_table</td>
+<td>表格</td>
+</tr>
+<tr>
+<td style="text-align:left">_theme</td>
+<td>各组件的配色（引入了所有变量和打包的mixins）</td>
+</tr>
+<tr>
+<td style="text-align:left">_thumbnail</td>
+<td>略缩图</td>
+</tr>
+<tr>
+<td style="text-align:left">_tooltips</td>
+<td>工具提示</td>
+</tr>
+<tr>
+<td style="text-align:left">_type</td>
+<td>排版（含各种文本、例如大小号、对齐、略缩语、地址等文本）</td>
+</tr>
+<tr>
+<td style="text-align:left">_utilities</td>
+<td>内容细节处理（含clearfix、hide/show、pull-left/right等）</td>
+</tr>
+<tr>
+<td style="text-align:left">_variables</td>
+<td>所有组件变量</td>
+</tr>
+<tr>
+<td style="text-align:left">_wells</td>
+<td>类似于消息面板（类似但不是情景背景色和警告框）</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">mixin下的.scss</th>
+<th>文件说明(简述)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_alert</td>
+<td>警告框的代码块（代码块：通过@mixin 定义的函数。即代表<strong>可重用的代码块</strong>）</td>
+</tr>
+<tr>
+<td style="text-align:left">_background-variant</td>
+<td>情景色代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_border-radius</td>
+<td>边的半径代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_buttons</td>
+<td>按钮代码块，含尺寸响应</td>
+</tr>
+<tr>
+<td style="text-align:left">_center-block</td>
+<td>定义一个行标签的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_clearfix</td>
+<td>清除浮动的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_forms</td>
+<td>表单和表单组的公共代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_gradients</td>
+<td>渐变</td>
+</tr>
+<tr>
+<td style="text-align:left">_gird</td>
+<td>布局间距处理的代码块（用于网格布局）</td>
+</tr>
+<tr>
+<td style="text-align:left">_gird-framework</td>
+<td>生成网格布局</td>
+</tr>
+<tr>
+<td style="text-align:left">_hide-text</td>
+<td>文本隐藏（将在bootstrap4中删除）</td>
+</tr>
+<tr>
+<td style="text-align:left">_image</td>
+<td>图片和其<strong>响应式</strong>处理（强调一下自适应和响应式不是同一个概念）</td>
+</tr>
+<tr>
+<td style="text-align:left">_labers</td>
+<td>laber标签用的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_list-group</td>
+<td>列表组通用代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_nav-divider</td>
+<td>用于下拉和导航列表（水平分割）</td>
+</tr>
+<tr>
+<td style="text-align:left">_nav-vertical-align</td>
+<td>计算元素垂直居中，用于导航栏</td>
+</tr>
+<tr>
+<td style="text-align:left">_opacity</td>
+<td>透明度（含其IE兼容处理）</td>
+</tr>
+<tr>
+<td style="text-align:left">_pagination</td>
+<td>分页的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_panels</td>
+<td>面板代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_progress-bar</td>
+<td>进度条代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_reset-filters</td>
+<td>图片透明处理（用于IE兼容的）</td>
+</tr>
+<tr>
+<td style="text-align:left">_reset-text</td>
+<td>初始化文本类型样式属性的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_resize</td>
+<td>调整大小（css3属性，元素尺寸调整）</td>
+</tr>
+<tr>
+<td style="text-align:left">_responsive-visibility</td>
+<td>响应处理（含表格标签的hack）</td>
+</tr>
+<tr>
+<td style="text-align:left">_size</td>
+<td>定义盒子宽高</td>
+</tr>
+<tr>
+<td style="text-align:left">_tab-focus</td>
+<td>触发outline的兼容处理。注释上声明是只用于webkit内核的浏览器的兼容处理。具体还用在哪些地方需要再研究。</td>
+</tr>
+<tr>
+<td style="text-align:left">_table-row</td>
+<td>将table转化为row(网格)，并防止不规范的表格嵌套。</td>
+</tr>
+<tr>
+<td style="text-align:left">_text-emphasis</td>
+<td>文本强调转换代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_text-overflow</td>
+<td>文本强制一行的代码块</td>
+</tr>
+<tr>
+<td style="text-align:left">_vendor-prefixes</td>
+<td>集合了所有需要写内核兼容的css属性，并生成代码块。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="缺失的说明"><a href="#缺失的说明" class="headerlink" title="缺失的说明"></a>缺失的说明</h3><ul>
+<li>bootstrap-compass.scss</li>
+<li>bootstrap-mincer.scss</li>
+<li>bootstrap-sprockets.scss</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/关于bootstrap框架里media类的解析/" rel="next" title="关于bootstrap框架里media类的解析">
+                <i class="fa fa-chevron-left"></i> 关于bootstrap框架里media类的解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/04/深度了解bootstrap源码之sass篇（二）/" rel="prev" title="深度了解bootstrap源码之sass篇（二）">
+                深度了解bootstrap源码之sass篇（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2016/07/29/深度了解bootstrap源码之sass篇（一）/" data-title="深度了解bootstrap源码之sass篇（一）" data-url="http://yoursite.com/2016/07/29/深度了解bootstrap源码之sass篇（一）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sass架构和文件说明"><span class="nav-number">1.</span> <span class="nav-text">sass架构和文件说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初步了解"><span class="nav-number">1.1.</span> <span class="nav-text">初步了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件说明"><span class="nav-number">1.2.</span> <span class="nav-text">文件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺失的说明"><span class="nav-number">1.3.</span> <span class="nav-text">缺失的说明</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

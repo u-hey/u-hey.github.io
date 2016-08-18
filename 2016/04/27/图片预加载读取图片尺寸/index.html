@@ -1,0 +1,688 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是图片预加载在播放不同大小尺寸的幻灯片的时候，我们需要及时接收下一张图片的尺寸，这样能够更好的处理实现效果，用户体验也非常不错。这样在图片没有加载完毕就已经获得该图片尺寸的技术称为图片预加载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片预加载读取图片尺寸">
+<meta property="og:url" content="http://yoursite.com/2016/04/27/图片预加载读取图片尺寸/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="什么是图片预加载在播放不同大小尺寸的幻灯片的时候，我们需要及时接收下一张图片的尺寸，这样能够更好的处理实现效果，用户体验也非常不错。这样在图片没有加载完毕就已经获得该图片尺寸的技术称为图片预加载">
+<meta property="og:updated_time" content="2016-07-29T12:26:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片预加载读取图片尺寸">
+<meta name="twitter:description" content="什么是图片预加载在播放不同大小尺寸的幻灯片的时候，我们需要及时接收下一张图片的尺寸，这样能够更好的处理实现效果，用户体验也非常不错。这样在图片没有加载完毕就已经获得该图片尺寸的技术称为图片预加载">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 图片预加载读取图片尺寸 | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图片预加载读取图片尺寸
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-27T16:26:01+08:00" content="2016-04-27">
+              2016-04-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是图片预加载"><a href="#什么是图片预加载" class="headerlink" title="什么是图片预加载"></a>什么是图片预加载</h1><p style="text-indent: 2em;">在播放不同大小尺寸的幻灯片的时候，我们需要及时接收下一张图片的尺寸，这样能够更好的处理实现效果，用户体验也非常不错。这样在图片没有加载完毕就已经获得该图片尺寸的技术称为图片预加载</p>
+
+<a id="more"></a>
+<h1 id="如何判断图片预加载完成"><a href="#如何判断图片预加载完成" class="headerlink" title="如何判断图片预加载完成"></a>如何判断图片预加载完成</h1><p style="text-indent: 2em;">可能你已经了解了，在浏览器渲染图片的时候，它获得图片的一片区域的时候，就已经为这张图片预留了一块空白的区域来填充图片，这就是预加载获得图片尺寸最原始的使用方法。但是，在js里面并不能获得这个事件，只有通过图片获得尺寸这一刻来确认图片已经预加载完成。</p><br><p style="text-indent: 2em;">可以这么做，图片的初始尺寸为0，当尺寸不为0的时候，则确认这张图片预加载结束。如：</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var img=new Image();</div><div class="line">img.src=&apos;1.png&apos;;</div><div class="line">var width=img.width;//=0</div><div class="line">if(width!=img.width ¦¦ height!=img.height)</div><div class="line">&#123;</div><div class="line">	alert(&apos;img预加载完成&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br># 如果图片缓存了<br><p style="text-indent: 2em;">如果图片缓存了，我们可以更快的从缓存图片中读取图片的尺寸，而不必等待图片的预加载完成。如：</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var img=new Image();</div><div class="line">img.src=&apos;1.png&apos;;</div><div class="line">// 如果图片被缓存，则直接返回缓存数据</div><div class="line">if(img.complete)</div><div class="line">&#123;</div><div class="line">	alert(img.width);</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br><p style="text-indent: 2em;">当然，预加载和缓存结合起来的话，必须先判断缓存。</p>
+
+
+<h1 id="完整的预加载读取尺寸函数"><a href="#完整的预加载读取尺寸函数" class="headerlink" title="完整的预加载读取尺寸函数"></a>完整的预加载读取尺寸函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">/***************************************************************************************</div><div class="line"> * 图片头数据加载就绪获取图片尺寸</div><div class="line"> * @version	2011.05.27</div><div class="line"> * @author	TangBin</div><div class="line"> * @see		</div><div class="line"> * @param	&#123;String&#125;	图片路径</div><div class="line"> * @param	&#123;Function&#125;	尺寸就绪</div><div class="line"> * @param	&#123;Function&#125;	加载完毕 (可选)</div><div class="line"> * @param	&#123;Function&#125;	加载错误 (可选)</div><div class="line">yundanran_imageSize(&apos;1.png&apos;, function ()&#123;</div><div class="line">	alert(&apos;size ready: width=&apos; + this.width + &apos;; height=&apos; + this.height);</div><div class="line">&#125;);</div><div class="line">*******************************************************************************************/</div><div class="line">var yundanran_imageSize = (function () &#123;</div><div class="line">	var list = [], intervalId = null,</div><div class="line"> </div><div class="line">	// 用来执行队列</div><div class="line">	tick = function () &#123;</div><div class="line">		var i = 0;</div><div class="line">		for (; i &lt; list.length; i++) &#123;</div><div class="line">			list[i].end ? list.splice(i--, 1) : list[i]();</div><div class="line">		&#125;;</div><div class="line">		!list.length &amp;&amp; stop();</div><div class="line">	&#125;,</div><div class="line"> </div><div class="line">	// 停止所有定时器队列</div><div class="line">	stop = function () &#123;</div><div class="line">		clearInterval(intervalId);</div><div class="line">		intervalId = null;</div><div class="line">	&#125;;</div><div class="line"> </div><div class="line">	return function (url, ready, load, error) &#123;</div><div class="line">		var onready, width, height, newWidth, newHeight,</div><div class="line">			img = new Image();</div><div class="line"> </div><div class="line">		img.src = url;</div><div class="line"> </div><div class="line">		// 如果图片被缓存，则直接返回缓存数据</div><div class="line">		if (img.complete) &#123;</div><div class="line">			ready.call(img);</div><div class="line">			load &amp;&amp; load.call(img);</div><div class="line">			return;</div><div class="line">		&#125;;</div><div class="line"> </div><div class="line">		width = img.width;</div><div class="line">		height = img.height;</div><div class="line"> </div><div class="line">		// 加载错误后的事件</div><div class="line">		img.onerror = function () &#123;</div><div class="line">			error &amp;&amp; error.call(img);</div><div class="line">			onready.end = true;</div><div class="line">			img = img.onload = img.onerror = null;</div><div class="line">		&#125;;</div><div class="line"> </div><div class="line">		// 图片尺寸就绪</div><div class="line">		onready = function () &#123;</div><div class="line">			newWidth = img.width;</div><div class="line">			newHeight = img.height;</div><div class="line">			if (newWidth !== width ¦¦ newHeight !== height ¦¦</div><div class="line">				// 如果图片已经在其他地方加载可使用面积检测</div><div class="line">				newWidth * newHeight &gt; 1024</div><div class="line">			) &#123;</div><div class="line">				ready.call(img);</div><div class="line">				onready.end = true;</div><div class="line">			&#125;;</div><div class="line">		&#125;;</div><div class="line">		onready();</div><div class="line"> </div><div class="line">		// 完全加载完毕的事件</div><div class="line">		img.onload = function () &#123;</div><div class="line">			// onload在定时器时间差范围内可能比onready快</div><div class="line">			// 这里进行检查并保证onready优先执行</div><div class="line">			!onready.end &amp;&amp; onready();</div><div class="line"> </div><div class="line">			load &amp;&amp; load.call(img);</div><div class="line"> </div><div class="line">			// IE gif动画会循环执行onload，置空onload即可</div><div class="line">			img = img.onload = img.onerror = null;</div><div class="line">		&#125;;</div><div class="line"> </div><div class="line">		// 加入队列中定期执行</div><div class="line">		if (!onready.end) &#123;</div><div class="line">			list.push(onready);</div><div class="line">			// 无论何时只允许出现一个定时器，减少浏览器性能损耗</div><div class="line">			if (intervalId === null) intervalId = setInterval(tick, 40);</div><div class="line">		&#125;;</div><div class="line">	&#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p style="text-indent: 2em;">这段代码来自前辈的博客。这里借来一用了。</p>
+
+<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p></p><p style="text-indent: 2em;">实例演示：</p><p></p>
+<ul>
+<li><a href="http://www.planeart.cn/demo/imgReady/" target="_blank" rel="external">http://www.planeart.cn/demo/imgReady/</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/使用Ajax-入门/" rel="next" title="使用Ajax(入门)">
+                <i class="fa fa-chevron-left"></i> 使用Ajax(入门)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/28/ife-task001-学习记录/" rel="prev" title="ife-task001 学习记录">
+                ife-task001 学习记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2016/04/27/图片预加载读取图片尺寸/" data-title="图片预加载读取图片尺寸" data-url="http://yoursite.com/2016/04/27/图片预加载读取图片尺寸/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是图片预加载"><span class="nav-number">1.</span> <span class="nav-text">什么是图片预加载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何判断图片预加载完成"><span class="nav-number">2.</span> <span class="nav-text">如何判断图片预加载完成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的预加载读取尺寸函数"><span class="nav-number">3.</span> <span class="nav-text">完整的预加载读取尺寸函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#demo"><span class="nav-number">4.</span> <span class="nav-text">demo</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
