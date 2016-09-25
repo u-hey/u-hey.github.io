@@ -69,6 +69,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
 
@@ -82,19 +84,16 @@
 
 
 
-<meta name="description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
+<meta name="description" content="前言  这一章主要学习组件alert。目的了解写法，通透其用意。提升建模能力。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度了解bootstrap源码之sass篇（二）">
-<meta property="og:url" content="http://yoursite.com/2016/08/04/深度了解bootstrap源码之sass篇（二）/index.html">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（三）">
+<meta property="og:url" content="http://yoursite.com/2016/09/25/深度了解bootstrap源码之sass篇（三）/index.html">
 <meta property="og:site_name" content="uhey">
-<meta property="og:description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
-<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg">
-<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var2.jpg">
-<meta property="og:updated_time" content="2016-08-04T10:27:24.000Z">
+<meta property="og:description" content="前言  这一章主要学习组件alert。目的了解写法，通透其用意。提升建模能力。">
+<meta property="og:updated_time" content="2016-09-25T13:30:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（二）">
-<meta name="twitter:description" content="前言  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。">
-<meta name="twitter:image" content="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（三）">
+<meta name="twitter:description" content="前言  这一章主要学习组件alert。目的了解写法，通透其用意。提升建模能力。">
 
 
 
@@ -112,7 +111,7 @@
   };
 </script>
 
-  <title> 深度了解bootstrap源码之sass篇（二） | uhey </title>
+  <title> 深度了解bootstrap源码之sass篇（三） | uhey </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +251,7 @@
             
             
               
-                深度了解bootstrap源码之sass篇（二）
+                深度了解bootstrap源码之sass篇（三）
               
             
           </h1>
@@ -264,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T18:21:53+08:00" content="2016-08-04">
-              2016-08-04
+            <time itemprop="dateCreated" datetime="2016-09-25T21:26:52+08:00" content="2016-09-25">
+              2016-09-25
             </time>
           </span>
 
@@ -292,23 +291,12 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这一章主要学习_variables.scss。目的是学习优秀框架的变量声明方式及结构。所有变量声明的方式决定整体架构的风格。直接决定了UI组件的编写规划，贯穿整体，非常重要。最先了解变量有助于后面UI组件的研究。<br><a id="more"></a></p>
-<h2 id="变量声明方式"><a href="#变量声明方式" class="headerlink" title="变量声明方式"></a>变量声明方式</h2><ul>
-<li><p>变量命名规范<br>所有变量声明是以<strong>描述 - 场景 - 尺寸 - 基线</strong>从左至右的先后顺 序决定。<br>例如：<br>变量<code>$alert-success-bg</code>  <em>(框架警示框组件没有大小尺寸)</em><br>alert：警示框<br>success：场景为成功时<br>bg：背景色</p>
-<p>再举个栗子，变量：<code>$padding-large-vertical</code><br>padding：内边距<br>large：大尺寸<br>vertical：基线(y轴,代表padding-top和padding-bottom)</p>
-</li>
-</ul>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ul>
-<li>全局属性：公共属性的变量，用于组件全局属性的变量。</li>
-<li>组件变量块：公共代码块所需要的属性变量，尺寸和场景的变量。<br>以下是我画的结构图：<br><img src="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var1.jpg" alt="sass架构示意图"><br><img src="http://u-hey.com/wp-content/uploads/2016/08/BSsass-var2.jpg" alt="sass架构示意图"></li>
-</ul>
-<p>以上包含了_variables全部变量属性，以及结构说明。<br><em>注：</em></p>
-<ul>
-<li><em>鼠标行为：link,hover,active</em></li>
-<li><em>鼠标点击：active</em></li>
-<li><em>鼠标悬停：hover</em></li>
-<li><em>其它：暂不明</em></li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这一章主要学习组件alert。目的了解写法，通透其用意。提升建模能力。<br><a id="more"></a></p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p>  <strong>alert</strong>组件（警告框）。分_alert.scss(即mixins)和alert.scss</p>
+<h2 id="alert-scss"><a href="#alert-scss" class="headerlink" title="_alert.scss"></a>_alert.scss</h2><p>  源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  // 声明一个混合名为名为alert-variant，并传递三个固定参数(背景色，边框色，字体色)。</div><div class="line"> @mixin alert-variant($background, $border, $text-color) &#123;</div><div class="line">  background-color: $background;</div><div class="line">  border-color: $border;</div><div class="line">  color: $text-color;</div><div class="line"></div><div class="line">  // 初始换行线，使换行线的上边线颜色加深5%，颜色基于参数（边框色）</div><div class="line">  hr &#123;</div><div class="line">    border-top-color: darken($border, 5%);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 初始样式，用于链接样式，指定文本颜色加深10%，颜色基于参数（字体色）。</div><div class="line">  .alert-link &#123;</div><div class="line">    color: darken($text-color, 10%);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="alert-scss-1"><a href="#alert-scss-1" class="headerlink" title="alert.scss"></a>alert.scss</h2><p> 源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">// 初始样式</div><div class="line"></div><div class="line">.alert &#123;</div><div class="line">  padding: $alert-padding;</div><div class="line">  margin-bottom: $line-height-computed;</div><div class="line">  border: 1px solid transparent;</div><div class="line">  border-radius: $alert-border-radius;</div><div class="line"></div><div class="line">  // 用于头部的或大号的警告框</div><div class="line">  h4 &#123;</div><div class="line">    margin-top: 0;</div><div class="line">    // 指定h4继承$headings-color，h1~h4和a标签一样没有默认的color属性，所以要设置inherit。</div><div class="line">    color: inherit;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 指定有链接类的样式</div><div class="line">  .alert-link &#123;</div><div class="line">    font-weight: $alert-link-font-weight;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 指定文本标签的间距使其内容对齐</div><div class="line">  &gt; p,</div><div class="line">  &gt; ul &#123;</div><div class="line">    margin-bottom: 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; p + p &#123;</div><div class="line">    margin-top: 5px;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 右上角关闭按钮样式</div><div class="line">//</div><div class="line">// 固定在右上角的关闭按钮样式</div><div class="line"></div><div class="line">.alert-dismissable, // 3.2.0之前版本样式名</div><div class="line">.alert-dismissible &#123;</div><div class="line">  padding-right: ($alert-padding + 20);</div><div class="line"></div><div class="line">  // 定位</div><div class="line">  .close &#123;</div><div class="line">    position: relative;</div><div class="line">    top: -2px;</div><div class="line">    right: -21px;</div><div class="line">    color: inherit;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 场景</div><div class="line">//</div><div class="line">// 警告框场景类样式，调用混合alert-variant。分别设置背景色，线条色，文本色。</div><div class="line"></div><div class="line">.alert-success &#123;</div><div class="line">  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.alert-info &#123;</div><div class="line">  @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.alert-warning &#123;</div><div class="line">  @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.alert-danger &#123;</div><div class="line">  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p> <code>@mixin</code>与 <code>@mixin</code> ：声明混合，可以传递参数，参数名以$符号开始，多个参数以逗号分开，也可以给参数设置默认值。声明的<code>@mixin</code>通过<code>@include</code>来调用。</p>
+<p> <code>darken</code>：sass函数，表示颜色加深。调用方法为<code>darken($color,$amount)</code>，第一个参数为颜色值，第二个参数为百分比。</p>
 
       
     </div>
@@ -340,17 +328,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/29/深度了解bootstrap源码之sass篇（一）/" rel="next" title="深度了解bootstrap源码之sass篇（一）">
-                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（一）
+              <a href="/2016/08/04/深度了解bootstrap源码之sass篇（二）/" rel="next" title="深度了解bootstrap源码之sass篇（二）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（二）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/25/深度了解bootstrap源码之sass篇（三）/" rel="prev" title="深度了解bootstrap源码之sass篇（三）">
-                深度了解bootstrap源码之sass篇（三） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,7 +359,7 @@
 
           
   <div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="2016/08/04/深度了解bootstrap源码之sass篇（二）/" data-title="深度了解bootstrap源码之sass篇（二）" data-url="http://yoursite.com/2016/08/04/深度了解bootstrap源码之sass篇（二）/"></div>
+	<div class="ds-thread" data-thread-key="2016/09/25/深度了解bootstrap源码之sass篇（三）/" data-title="深度了解bootstrap源码之sass篇（三）" data-url="http://yoursite.com/2016/09/25/深度了解bootstrap源码之sass篇（三）/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"uhey"};
 	(function() {
@@ -558,7 +542,7 @@ var duoshuoQuery = {short_name:"uhey"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明方式"><span class="nav-number">2.</span> <span class="nav-text">变量声明方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构"><span class="nav-number">3.</span> <span class="nav-text">结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert-scss"><span class="nav-number">3.</span> <span class="nav-text">_alert.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert-scss-1"><span class="nav-number">4.</span> <span class="nav-text">alert.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">5.</span> <span class="nav-text">知识点</span></a></li></ol></div>
             
           </div>
         </section>
