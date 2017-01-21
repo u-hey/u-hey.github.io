@@ -1,0 +1,691 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 这一章主要学习button。目的了解写法，通透其用意，提升抽象能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（四）">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/深度了解bootstrap源码之sass篇（四）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="前言 这一章主要学习button。目的了解写法，通透其用意，提升抽象能力。">
+<meta property="og:updated_time" content="2017-01-21T14:19:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（四）">
+<meta name="twitter:description" content="前言 这一章主要学习button。目的了解写法，通透其用意，提升抽象能力。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（四） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（四）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-21T22:17:40+08:00" content="2017-01-21">
+              2017-01-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习button。目的了解写法，通透其用意，提升抽象能力。<br><a id="more"></a></p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> button组件（按钮）。分_button.scss、_tab-focus.scss(即mixins)和button.scss。</p>
+<h2 id="buttons-scss"><a href="#buttons-scss" class="headerlink" title="_buttons.scss"></a>_buttons.scss</h2><p>  原文：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">  // variant意思为多样的，易变的不定的。</div><div class="line">  // 声明一个混合函数，接受三个变量分别表示字体颜色、背景色、线条色。并定义按钮状态改变后该三个参数的值。</div><div class="line">  @mixin button-variant($color, $background, $border) &#123;</div><div class="line">  color: $color;</div><div class="line">  background-color: $background;</div><div class="line">  border-color: $border;</div><div class="line"></div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus,</div><div class="line">  &amp;.focus,</div><div class="line">  &amp;:active,</div><div class="line">  &amp;.active,</div><div class="line">  // 拥有下拉功能标识的按钮样式</div><div class="line">  .open &gt; &amp;.dropdown-toggle &#123;</div><div class="line">    color: $color;</div><div class="line">    background-color: darken($background, 10%);</div><div class="line">        border-color: darken($border, 12%);</div><div class="line">  &#125;</div><div class="line">  // 这里重复active是为了覆盖拥有下拉功能标识的按钮样式，并且避免背景色冲突。</div><div class="line">  &amp;:active,</div><div class="line">  &amp;.active,</div><div class="line">  .open &gt; &amp;.dropdown-toggle &#123;</div><div class="line">    background-image: none;</div><div class="line">  &#125;</div><div class="line">  &amp;.disabled,</div><div class="line">  &amp;[disabled],</div><div class="line">  fieldset[disabled] &amp; &#123;</div><div class="line">    &amp;,</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;.focus,</div><div class="line">    &amp;:active,</div><div class="line">    &amp;.active &#123;</div><div class="line">      background-color: $background;</div><div class="line">          border-color: $border;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  // 有勋章功能标识的按钮样式，</div><div class="line">  .badge &#123;</div><div class="line">    color: $background;</div><div class="line">    background-color: $color;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 第一章讲过vertical和horizontal，xy轴线上一个类似Y轴表示垂直距离，一个类似X轴表示平行距离。</div><div class="line">// 定义一个按钮尺寸的混合，接受5个参数，分别表示垂直内边距、平行内边距、字体尺寸、行高、边角弧度。</div><div class="line">@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) &#123;</div><div class="line">  padding: $padding-vertical $padding-horizontal;</div><div class="line">  font-size: $font-size;</div><div class="line">  line-height: $line-height;</div><div class="line">  border-radius: $border-radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="tab-focus-scss"><a href="#tab-focus-scss" class="headerlink" title="_tab-focus.scss"></a>_tab-focus.scss</h2><p>  原文：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  // 重置WebKit内核focus样式</div><div class="line"></div><div class="line">@mixin tab-focus() &#123;</div><div class="line">  // 默认值，目前还不知道thin是什么意思，应该是一个组合属性。</div><div class="line">  outline: thin dotted;</div><div class="line">  // WebKit下，outline属性，设置了auto后5px是个摆设。令注③</div><div class="line">  outline: 5px auto -webkit-focus-ring-color;</div><div class="line">  // 不明白5px已是鸡肋，为啥还用outline-offset，有可能为了兼容其它浏览器，但是官方又说这是重置webkit的样式……一定是我哪里理解有问题？</div><div class="line">  outline-offset: -2px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="buttons-scss-1"><a href="#buttons-scss-1" class="headerlink" title="buttons.scss"></a>buttons.scss</h2><p> 原文：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div></pre></td><td class="code"><pre><div class="line"> //</div><div class="line">// Buttons</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">// Base styles</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line">.btn &#123;</div><div class="line">  display: inline-block;</div><div class="line">  margin-bottom: 0; // For input.btn</div><div class="line">  font-weight: $btn-font-weight;</div><div class="line">  text-align: center;</div><div class="line">  vertical-align: middle;</div><div class="line">  touch-action: manipulation; //注①，理解触控事件。</div><div class="line">  cursor: pointer;</div><div class="line">  background-image: none; // 注②，重置异常Firefox中Android的默认样式；</div><div class="line">  border: 1px solid transparent;</div><div class="line">  white-space: nowrap;</div><div class="line">  //调用button-size方法、并传入默认值。</div><div class="line">  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);</div><div class="line">  //调用user-select实现兼容前缀，IE10+</div><div class="line">  @include user-select(none);</div><div class="line"></div><div class="line">  &amp;,</div><div class="line">  &amp;:active,</div><div class="line">  &amp;.active &#123;</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;.focus &#123;</div><div class="line">    // 调用tab-focus方法，重置浏览器默认outline样式，定义新的outline样式。outline兼容IE8及以上</div><div class="line">      @include tab-focus;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus,</div><div class="line">  &amp;.focus &#123;</div><div class="line">    color: $btn-default-color;</div><div class="line">    text-decoration: none;</div><div class="line">  &#125;</div><div class="line">  // 这里调用的box-shadow和opacity方法就不赘述了，后面会详细说明。</div><div class="line">  &amp;:active,</div><div class="line">  &amp;.active &#123;</div><div class="line">    outline: 0;</div><div class="line">    background-image: none;</div><div class="line">    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &amp;.disabled,</div><div class="line">  &amp;[disabled],</div><div class="line">  fieldset[disabled] &amp; &#123;</div><div class="line">    cursor: $cursor-disabled;</div><div class="line">    pointer-events: none; // 禁用点击事件</div><div class="line">    @include opacity(.65);</div><div class="line">    @include box-shadow(none);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// button-variant方法实例，实现主题多种状态样式，实际使用过程中通常要继承.btn，例(.btn.btn-info&#123;&#125;)，但这里没有嵌套在.btn内，方便灵活使用。</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line">// 默认</div><div class="line">.btn-default &#123;</div><div class="line">  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);</div><div class="line">&#125;</div><div class="line">// 备选颜色</div><div class="line">.btn-primary &#123;</div><div class="line">  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);</div><div class="line">&#125;</div><div class="line">// 成功的绿色</div><div class="line">.btn-success &#123;</div><div class="line">  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);</div><div class="line">&#125;</div><div class="line">// 信息提示 蓝色</div><div class="line">.btn-info &#123;</div><div class="line">  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);</div><div class="line">&#125;</div><div class="line">// 红色预警</div><div class="line">.btn-warning &#123;</div><div class="line">  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);</div><div class="line">&#125;</div><div class="line">// 危险和错误</div><div class="line">.btn-danger &#123;</div><div class="line">  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 链接按钮</div><div class="line">// -------------------------</div><div class="line"></div><div class="line">// 让人看起来像是用于链接的链接按钮样式</div><div class="line">.btn-link &#123;</div><div class="line">  color: $link-color;</div><div class="line">  font-weight: normal;</div><div class="line">  border-radius: 0;</div><div class="line"></div><div class="line">  &amp;,</div><div class="line">  &amp;:active,</div><div class="line">  &amp;.active,</div><div class="line">  &amp;[disabled],</div><div class="line">  fieldset[disabled] &amp; &#123;</div><div class="line">    background-color: transparent;</div><div class="line">    @include box-shadow(none);</div><div class="line">  &#125;</div><div class="line">  &amp;,</div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus,</div><div class="line">  &amp;:active &#123;</div><div class="line">    border-color: transparent;</div><div class="line">  &#125;</div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus &#123;</div><div class="line">    color: $link-hover-color;</div><div class="line">    text-decoration: underline;</div><div class="line">    background-color: transparent;</div><div class="line">  &#125;</div><div class="line">  &amp;[disabled],</div><div class="line">  fieldset[disabled] &amp; &#123;</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:focus &#123;</div><div class="line">      color: $btn-link-disabled-color;</div><div class="line">      text-decoration: none;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 按钮尺寸 实例button-size方法、前面已经说过</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line">.btn-lg &#123;</div><div class="line">  // line-height: ensure even-numbered height of button next to large input</div><div class="line">  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);</div><div class="line">&#125;</div><div class="line">.btn-sm &#123;</div><div class="line">  // line-height: ensure proper height of button next to small input</div><div class="line">  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);</div><div class="line">&#125;</div><div class="line">.btn-xs &#123;</div><div class="line">  @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 块状的按钮、将display设置为block，会占据父元素宽度的100%。</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line">.btn-block &#123;</div><div class="line">  display: block;</div><div class="line">  width: 100%;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 垂直之间多个按钮的样式处理</div><div class="line">.btn-block + .btn-block &#123;</div><div class="line">  margin-top: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 覆盖input的display属性为blobk时的一些特异性。</div><div class="line">input[type=&quot;submit&quot;],</div><div class="line">input[type=&quot;reset&quot;],</div><div class="line">input[type=&quot;button&quot;] &#123;</div><div class="line">  &amp;.btn-block &#123;</div><div class="line">    width: 100%;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>注①：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action" target="_blank" rel="external">MDN之touch-action</a><ul>
+<li>表示触控动作，指定用户触控时的滚动行为（例如，值为pan-x时表示触摸操作可以触发水平滚动；但垂直滚动被禁止；值为none时表示阻止页面滚动），<strong>且必须给定区域</strong>。</li>
+<li>适用于所有元素，包括：非替换的内联元素、表行、行组、表列和列组。</li>
+<li>浏览器也会处理触控动作，应用程序在监听触屏动作时应将意图告知浏览器。(英文水平有限，后面翻译不出来了)</li>
+<li><a href="http://wf.uisdc.com/cn/input/touch-input/touchevents/#" target="_blank" rel="external">延伸知识之实现自定义手势</a></li>
+<li><a href="https://segmentfault.com/a/1190000002712653" target="_blank" rel="external">延伸知识之移动端手势图解</a>,在页面底部 </li>
+</ul>
+</li>
+<li>注②： <a href="https://github.com/necolas/normalize.css/issues/214" target="_blank" rel="external">git参考链接</a></li>
+<li>有时候官方文档看的很头疼，理解很费脑的啊，别人一会会就明白了我不仅看不懂值的意思还看不懂语法，显得我智商很低下QAQ。偶然发现 → <a href="https://sanwen8.cn/p/261Kd9C.html" target="_blank" rel="external">理解CSS属性值语法</a></li>
+<li>注③：-webkit-focus-ring-color是webkit内置属性，<a href="http://ued.ctrip.com/webkitcss/index.html" target="_blank" rel="external">检索：-webkit-css-lib</a>。不过这里面查不到该属性，可以随便逛逛，另外stackoverflow有对该属性的讨论 → <a href="http://stackoverflow.com/questions/7538771/what-is-webkit-focus-ring-color" target="_blank" rel="external">What is -webkit-focus-ring-color</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/25/深度了解bootstrap源码之sass篇（三）/" rel="next" title="深度了解bootstrap源码之sass篇（三）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（三）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2017/01/21/深度了解bootstrap源码之sass篇（四）/" data-title="深度了解bootstrap源码之sass篇（四）" data-url="http://yoursite.com/2017/01/21/深度了解bootstrap源码之sass篇（四）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#buttons-scss"><span class="nav-number">3.</span> <span class="nav-text">_buttons.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tab-focus-scss"><span class="nav-number">4.</span> <span class="nav-text">_tab-focus.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#buttons-scss-1"><span class="nav-number">5.</span> <span class="nav-text">buttons.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">6.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
