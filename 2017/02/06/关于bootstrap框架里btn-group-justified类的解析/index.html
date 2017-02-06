@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="uhey">
 <meta property="og:description" content="前言   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。">
 <meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png">
-<meta property="og:updated_time" content="2017-02-06T14:52:38.000Z">
+<meta property="og:updated_time" content="2017-02-06T15:08:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于bootstrap框架里btn-group-justified类的解析">
 <meta name="twitter:description" content="前言   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。">
@@ -299,7 +299,7 @@
 <p>  列宽、单元格宽计算规则：</p>
 <p>  这与表自动布局有关，<strong>列宽</strong>的总值与<strong>表宽</strong>的值是相对应的。列宽的值和<strong>单元格宽</strong>有关，单元格宽由单元格里内容的长度决定(简称<strong>块宽</strong>)。</p>
 <p>  总块宽小于表宽时，浏览器会自动计算出单元格的宽值，再相应的计算各个列宽值，其中<strong>总块宽与表宽的差值由列宽均分</strong>；</p>
-<p>  总块宽大于表宽时，此时列宽不够分配，前单元格宽值会挤掉后单元格宽，所以，我们应++合理的分配单元格的宽度++(划重点)。</p>
+<p>  总块宽大于表宽时，此时列宽不够分配，前单元格宽值会挤掉后单元格宽，所以，我们应<strong>合理的分配单元格的宽度</strong>(划重点)。</p>
 <p>  由以上我得出一个列宽公式：块宽+差值/N列=列宽值；(差值：表宽-总块宽)</p>
 <hr>
 <p>举个栗子：</p>
@@ -330,7 +330,7 @@
 <p>可以这么理解。列宽 等于 表宽 除以 N个单元格；<br>要注意的是设置此属性之后，块宽将不能影响列宽的计算。</p>
 <p>那么表单元的width:1%到底是干啥呢?</p>
 <p><strong>表单元宽值越小，差值则越大，可分配的列宽值就越多，如此方便你添加更多的列</strong>，不然可试试表单元width:50%的三列表，第三列都给你挤没咯。</p>
-<h3 id="话说回来，table-layout-fixed下width不起作用？"><a href="#话说回来，table-layout-fixed下width不起作用？" class="headerlink" title="话说回来，table-layout: fixed下width不起作用？"></a>话说回来，table-layout: fixed下width不起作用？</h3><p>其实有一丢丢小差别的，但是微乎其微，且合理的表宽值能避免这个问题。有兴趣的可以去 <a href="http://v3.bootcss.com/components/#btn-groups" target="_blank" rel="external">bootstrap之btn-groups组件</a>F12一下，在两端对齐排列的按钮组的示例demo里，把其中一个块的内容去掉，彼时块宽为0，对比对比有无width:1%时的各列宽值素吧！<br><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png" alt=""></p>
+<h3 id="话说回来，table-layout-fixed下width不起作用？"><a href="#话说回来，table-layout-fixed下width不起作用？" class="headerlink" title="话说回来，table-layout: fixed下width不起作用？"></a>话说回来，table-layout: fixed下width不起作用？</h3><p>其实有一丢丢小差别的，但是微乎其微，且合理的表宽值能避免这个问题。有兴趣的可以去 <a href="http://v3.bootcss.com/components/#btn-groups" target="_blank" rel="external">bootstrap之btn-groups组件</a> F12一下，在两端对齐排列的按钮组的示例demo里，把其中一个块的内容去掉，彼时块宽为0，对比有无width:1%时的各列宽值吧！<br><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png" alt=""></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> 如上分析，我忽然发现</p>
 <ul>
 <li>父元素：display:table;width:100%;table-layout: fixed;</li>
