@@ -82,16 +82,18 @@
 
 
 
-<meta name="description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
+<meta name="description" content="前言   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于bootstrap框架里media类的解析">
-<meta property="og:url" content="http://yoursite.com/2016/07/27/关于bootstrap框架里media类的解析/index.html">
+<meta property="og:title" content="关于bootstrap框架里btn-group-justified类的解析">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/关于bootstrap框架里btn-group-justified类的解析/index.html">
 <meta property="og:site_name" content="uhey">
-<meta property="og:description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
-<meta property="og:updated_time" content="2016-07-29T12:26:54.000Z">
+<meta property="og:description" content="前言   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png">
+<meta property="og:updated_time" content="2017-02-06T14:52:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于bootstrap框架里media类的解析">
-<meta name="twitter:description" content="写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。">
+<meta name="twitter:title" content="关于bootstrap框架里btn-group-justified类的解析">
+<meta name="twitter:description" content="前言   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png">
 
 
 
@@ -109,7 +111,7 @@
   };
 </script>
 
-  <title> 关于bootstrap框架里media类的解析 | uhey </title>
+  <title> 关于bootstrap框架里btn-group-justified类的解析 | uhey </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +251,7 @@
             
             
               
-                关于bootstrap框架里media类的解析
+                关于bootstrap框架里btn-group-justified类的解析
               
             
           </h1>
@@ -261,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-27T20:11:34+08:00" content="2016-07-27">
-              2016-07-27
+            <time itemprop="dateCreated" datetime="2017-02-06T22:14:55+08:00" content="2017-02-06">
+              2017-02-06
             </time>
           </span>
 
@@ -289,51 +291,52 @@
       
 
       
-        <p>写这篇文章源于工作项目前端UI要重构，而我选择参考bs框架来促进这个任务。同时，在创建媒体对象UI组件时，我发现bs框架的_media.scss类有几个属性令我不解。<br><a id="more"></a><br>bs完整的_media.scss类是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">.media &#123;</div><div class="line">  // Proper spacing between instances of .media</div><div class="line">  margin-top: 15px;</div><div class="line"></div><div class="line">  &amp;:first-child &#123;</div><div class="line">    margin-top: 0;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media,</div><div class="line">.media-body &#123;</div><div class="line">  zoom: 1;</div><div class="line">  overflow: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-body &#123;</div><div class="line">  width: 10000px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-object &#123;</div><div class="line">  display: block;</div><div class="line"></div><div class="line">  // Fix collapse in webkit from max-width: 100% and display: table-cell.</div><div class="line">  &amp;.img-thumbnail &#123;</div><div class="line">    max-width: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-right,</div><div class="line">.media &gt; .pull-right &#123;</div><div class="line">  padding-left: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-left,</div><div class="line">.media &gt; .pull-left &#123;</div><div class="line">  padding-right: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-left,</div><div class="line">.media-right,</div><div class="line">.media-body &#123;</div><div class="line">  display: table-cell;</div><div class="line">  vertical-align: top;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-middle &#123;</div><div class="line">  vertical-align: middle;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.media-bottom &#123;</div><div class="line">  vertical-align: bottom;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Reset margins on headings for tighter default spacing</div><div class="line">.media-heading &#123;</div><div class="line">  margin-top: 0;</div><div class="line">  margin-bottom: 5px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Media list variation</div><div class="line">//</div><div class="line">// Undo default ul/ol styles</div><div class="line">.media-list &#123;</div><div class="line">  padding-left: 0;</div><div class="line">  list-style: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>最先令我疑惑的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.media-body &#123;</div><div class="line">  width: 10000px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>为什么要设置这么大的宽度呢？意义在哪？百度无果，我寻问了前辈豪大(豪情)，得到线索<a href="http://stackoverflow.com/questions/37178475/why-does-media-body-class-in-bootstrap-have-width-10-000px-and-media-class-have" target="_blank" rel="external">stackoverflow</a>。<br>又挑战我4级未过的英文水平了。。借助有道，我整理了一下提问和回答</p>
-<h3 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h3><blockquote>
-<p>Why does media-body class in bootstrap have width 10,000px and media class have overflow hidden and zoom 1?</p>
-</blockquote>
-<p>  翻译：<br>  <strong>在bootstrap框架里为什么<code>media-body</code>样式含有<code>width:10000px</code>和<code>media</code>样式含有<code>overflow:hidden</code>,<code>zoom:1</code>？</strong></p>
-<blockquote>
-<p>I have some question regarding the media classes in bootstrap.</p>
-<blockquote>
-<ol>
-<li>Why does .media-body class in bootstrap have width 10,000px? Why did they use display: table-cell not display: block?</li>
-<li>Why is overflow: hidden and zoom: 1used on .media class?</li>
-<li>Why doesn’t the div with .media-body actually take 10,000px width?</li>
-<li>What would happen if overflow: hidden and zoom: 1 are not used in .media class?</li>
-</ol>
-</blockquote>
-<p>As for my effort, I removed overflow, zoom and 10,000px width and observed no difference.</p>
-</blockquote>
-<p>翻译：<br><strong>我有一些关于bs框架里media类的问题。</strong><br><strong>1.  为什么.media-body的宽为10000px,为什么是display:tall-cell而不是block?</strong><br><strong>2. 为什么.media用了zoom:1和overflow:hideen？</strong><br><strong>3. 为什么实际上div的宽度不是.media-body设置的10000px？</strong><br><strong>4. 如果不设置over-flow:hidden和zoom:1将会发生什么？</strong><br><strong>经过实践后，我删除over-flow:hidden和zoom:1和width:10000px观察到并没有什么改变。</strong><br>大致是这个意思QAQ有没有英语好点的指导指导……</p>
-<h3 id="回答"><a href="#回答" class="headerlink" title="回答"></a>回答</h3><blockquote>
-<p>I have found some comments in the collection “Responsive Bootstrap”:</p>
-<blockquote>
-<ol>
-<li>Create new block formatting context in modern browsers</li>
-<li>Avoid shrink-wrap behaviour of table-cell</li>
-<li>Override for IE6/7</li>
-<li>Create new block formatting context in IE6/7<br>  Alternatively, use ‘overflow:hidden’ if clipping is OK<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">display: table-cell; /* 1 */</div><div class="line">width: 10000px; /* 2 */</div><div class="line">@include old-ie() &#123;</div><div class="line">    *width: auto; /* 3 */</div><div class="line">    *zoom: 1; /* 4 */</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>zoom is a hack for IE6 and IE7. All browsers ignore attributes that begin with an asterisk. Only IE7 and below takes them into account.</p>
-</blockquote>
-<p>翻译：<br><strong>我收集到一些关于“bs响应”的回复：</strong><br><strong>1. <code>display: table-cell;</code>在新版本浏览器可触发BFC（块级格式化上下文），如果不知道什么是BFC，可以百度或者看我的前一篇文章<a href="u-hey.github.io/2016/05/12/overflow-hidden">overflow:hidden</a></strong><br><strong>2.  <code>width:10000px</code>能避免设置<code>table-cell</code>的盒子变型 (因为在IE6/7不支持<code>table-cell</code>属性，且浏览器对<code>table-cell</code>属性展现不一)</strong><br><strong>3.  <code>width:auto</code>在IE6/7中形同于重写/覆盖。（*width是IE8下的hack技术）</strong><br><strong>4.  <code>zoom:1</code>能在IE6/7中触发BFC</strong><br><strong>使用<code>overflow:hidden</code>能恰到好处的隐藏溢出样式。</strong></p>
-<p><code>zoom:1</code> 是IE6/7的hack技巧，所有浏览器都会忽略这个属性除了IE6/7.</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>   之前有一篇关于media类的解析，讲述bs框架的_media.scss类里media-body样式含有width:10000px的原因和寻找答案的过程。此篇是讲述寻找btn-group-justified直接子元素样式含有width:1%的原因，及寻找答案的过程。</p>
+<a id="more"></a>
+<h2 id="btn-group-justified类"><a href="#btn-group-justified类" class="headerlink" title="btn-group-justified类"></a>btn-group-justified类</h2><p>源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// Justified button groups</div><div class="line">// ----------------------</div><div class="line"></div><div class="line">.btn-group-justified &#123;</div><div class="line">  display: table;</div><div class="line">  width: 100%;</div><div class="line">  table-layout: fixed;//表格布局：列宽由表格宽度和列宽度设定。标识①</div><div class="line">  border-collapse: separate;//合并表格边框，使用该属性建议页面规定!DOCTYPE</div><div class="line">  &gt; .btn,</div><div class="line">  &gt; .btn-group &#123;</div><div class="line">    float: none;</div><div class="line">    display: table-cell;</div><div class="line">    width: 1%; // 标识②</div><div class="line">  &#125;</div><div class="line">  &gt; .btn-group .btn &#123;</div><div class="line">    width: 100%;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .btn-group .dropdown-menu &#123;</div><div class="line">    left: auto;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其它属性都很好理解，唯独标识②不知是何用意。遂群发求助，得线索：<a href="http://stackoverflow.com/questions/27846045/understanding-css-table-cell-and-percentage-width" target="_blank" rel="external">Understanding CSS table-cell and percentage width</a>。</p>
+<h3 id="单元格有无设置width时，浏览器经历了什么？"><a href="#单元格有无设置width时，浏览器经历了什么？" class="headerlink" title="单元格有无设置width时，浏览器经历了什么？"></a>单元格有无设置width时，浏览器经历了什么？</h3><p>  先不论bootstrap设置标识②的前后文关系，单说单元格设置width时，浏览器是如何计算的。</p>
+<p>  列宽、单元格宽计算规则：</p>
+<p>  这与表自动布局有关，<strong>列宽</strong>的总值与<strong>表宽</strong>的值是相对应的。列宽的值和<strong>单元格宽</strong>有关，单元格宽由单元格里内容的长度决定(简称<strong>块宽</strong>)。</p>
+<p>  总块宽小于表宽时，浏览器会自动计算出单元格的宽值，再相应的计算各个列宽值，其中<strong>总块宽与表宽的差值由列宽均分</strong>；</p>
+<p>  总块宽大于表宽时，此时列宽不够分配，前单元格宽值会挤掉后单元格宽，所以，我们应++合理的分配单元格的宽度++(划重点)。</p>
+<p>  由以上我得出一个列宽公式：块宽+差值/N列=列宽值；(差值：表宽-总块宽)</p>
 <hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>看来为了善用<code>table-cell</code>，Twitter大牛们又给我上了一课。<br>这里为了求证以上答案的真实性，我去拜访了张鑫旭前辈的博客，了解<a href="http://www.zhangxinxu.com/wordpress/2010/10/%E6%88%91%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E7%A7%8Ddisplaytable-cell%E7%9A%84%E5%BA%94%E7%94%A8/" target="_blank" rel="external">table-cell</a>。<br>在之前，我对table-cell属性仅仅停留在<strong>表单元形式展现</strong>的印象里，通俗理解，设置<code>display:table-cell</code>的盒子形式上会变成<code>&lt;table&gt;</code>，所以其子元素都会变成表单元，形同于<code>&lt;td&gt;</code>或<code>&lt;tr&gt;</code>。但由于IE6/7的不支持，所以设置其父元素需要配合<code>overflow:hidden</code>,<code>zoom:1</code>用于避免盒子塌陷，和触发BFC。而<code>*width:10000px</code>多余的宽度也恰到好处的被父元素隐藏。<br>所以<code>table-cell</code>有很高的使用价值，如：</p>
+<p>举个栗子：</p>
+<p>示例1，无width</p>
+<blockquote>
+<p>我手上有一个宽100px的盒子(表)，我在内部隔出三个等宽的空间出来(列)，每个空间都内都套了塑料袋(单元格)，我朝里面塞东西(块)，当东西没有塞满这个空间时，这三个空间仍然均等，当其中1号空间塞满了我又继续塞，于是1号空间就挤掉2号空间一点宽度。</p>
+</blockquote>
+<p>示例2，有width</p>
+<blockquote>
+<p>同上，100px宽的盒子，仍然在内部隔出三个等宽的空间出来(列)，每个空间都放置了一个小盒子(有width的单元格)，朝里面塞东西，结果同上面一样。</p>
+</blockquote>
+<p>这两个例子唯一不同的是，</p>
 <ul>
-<li>大小不固定元素的垂直居中，<em>在对图片垂直居中时，<code>img</code>标签应被<code>&lt;a&gt;</code>标签包裹。</em>(父table-cell + 父子vertical-align + 子inline-block)</li>
-<li>两栏自适应布局(兄弟flout + 兄弟table-cell)</li>
-<li>等高布局(父table-row + 子table-cell)</li>
-<li>列表布局(同上 + 子width)</li>
+<li>示例一：单元格宽值：单元格宽 == 块宽。</li>
+<li>示例二：单元格宽值：width值 ≤ 单元格宽 ≤ 块宽。</li>
 </ul>
-<p><em>(父：指父元素，子：指子元素，兄弟：相邻元素)</em></p>
-<p>超实用有木有，日常写demo都遇的上。<br>系统提示：恭喜玩家uhey技能提升10个点！</p>
+<p>基于列宽、单元格宽计算规则，两个例子的列宽值如下，</p>
+<ul>
+<li>示例一：块宽+[(表宽-总块宽)/N列]</li>
+<li>实例二：块宽小于width时，为width值，大于width时为块宽值。块宽+[表宽-(width或块宽)/N列]</li>
+</ul>
+<p>至此，width相对于表宽的计算规则已经明白其目的是为了让浏览器计算出百分比。</p>
+<h3 id="那么，btn-group-justified类中其直接子元素的width的值为何是1-？"><a href="#那么，btn-group-justified类中其直接子元素的width的值为何是1-？" class="headerlink" title="那么，btn-group-justified类中其直接子元素的width的值为何是1%？"></a>那么，btn-group-justified类中其直接子元素的width的值为何是1%？</h3><p>回到bootstrap，说说table-layout: fixed;</p>
+<blockquote>
+<p>w3c指设置 表格布局：列宽由表格宽度和列宽度设定。</p>
+</blockquote>
+<p>这样设置后，列宽值 与 单元格宽值 相等，</p>
+<p>可以这么理解。列宽 等于 表宽 除以 N个单元格；<br>要注意的是设置此属性之后，块宽将不能影响列宽的计算。</p>
+<p>那么表单元的width:1%到底是干啥呢?</p>
+<p><strong>表单元宽值越小，差值则越大，可分配的列宽值就越多，如此方便你添加更多的列</strong>，不然可试试表单元width:50%的三列表，第三列都给你挤没咯。</p>
+<h3 id="话说回来，table-layout-fixed下width不起作用？"><a href="#话说回来，table-layout-fixed下width不起作用？" class="headerlink" title="话说回来，table-layout: fixed下width不起作用？"></a>话说回来，table-layout: fixed下width不起作用？</h3><p>其实有一丢丢小差别的，但是微乎其微，且合理的表宽值能避免这个问题。有兴趣的可以去 <a href="http://v3.bootcss.com/components/#btn-groups" target="_blank" rel="external">bootstrap之btn-groups组件</a>F12一下，在两端对齐排列的按钮组的示例demo里，把其中一个块的内容去掉，彼时块宽为0，对比对比有无width:1%时的各列宽值素吧！<br><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170206191651.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> 如上分析，我忽然发现</p>
+<ul>
+<li>父元素：display:table;width:100%;table-layout: fixed;</li>
+<li>子元素：display: table-cell;</li>
+</ul>
+<p>以上配合能实现多列等分布局，又一css技巧~ get！</p>
 
       
     </div>
@@ -365,16 +368,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/16/ife-task002-学习记录/" rel="next" title="ife-task002 学习记录">
-                <i class="fa fa-chevron-left"></i> ife-task002 学习记录
+              <a href="/2017/01/21/深度了解bootstrap源码之sass篇（四）/" rel="next" title="深度了解bootstrap源码之sass篇（四）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（四）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/29/深度了解bootstrap源码之sass篇（一）/" rel="prev" title="深度了解bootstrap源码之sass篇（一）">
-                深度了解bootstrap源码之sass篇（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/06/深度了解bootstrap源码之sass篇（五）/" rel="prev" title="深度了解bootstrap源码之sass篇（五）">
+                深度了解bootstrap源码之sass篇（五） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -400,7 +403,7 @@
 
           
   <div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="2016/07/27/关于bootstrap框架里media类的解析/" data-title="关于bootstrap框架里media类的解析" data-url="http://yoursite.com/2016/07/27/关于bootstrap框架里media类的解析/"></div>
+	<div class="ds-thread" data-thread-key="2017/02/06/关于bootstrap框架里btn-group-justified类的解析/" data-title="关于bootstrap框架里btn-group-justified类的解析" data-url="http://yoursite.com/2017/02/06/关于bootstrap框架里btn-group-justified类的解析/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"uhey"};
 	(function() {
@@ -583,7 +586,7 @@ var duoshuoQuery = {short_name:"uhey"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#提问"><span class="nav-number">1.</span> <span class="nav-text">提问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回答"><span class="nav-number">2.</span> <span class="nav-text">回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#btn-group-justified类"><span class="nav-number">2.</span> <span class="nav-text">btn-group-justified类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元格有无设置width时，浏览器经历了什么？"><span class="nav-number">2.1.</span> <span class="nav-text">单元格有无设置width时，浏览器经历了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么，btn-group-justified类中其直接子元素的width的值为何是1-？"><span class="nav-number">2.2.</span> <span class="nav-text">那么，btn-group-justified类中其直接子元素的width的值为何是1%？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#话说回来，table-layout-fixed下width不起作用？"><span class="nav-number">2.3.</span> <span class="nav-text">话说回来，table-layout: fixed下width不起作用？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

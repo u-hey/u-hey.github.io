@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 这一章主要学习button-group。目的是学习扩展按钮组件的写法，需要先了解前一篇的知识：深度了解bootstrap源码之sass篇（四）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（五）">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/深度了解bootstrap源码之sass篇（五）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="前言 这一章主要学习button-group。目的是学习扩展按钮组件的写法，需要先了解前一篇的知识：深度了解bootstrap源码之sass篇（四）。">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/%E5%8A%9F%E8%83%BD%E7%B1%BB%E6%8C%89%E9%92%AE%E7%BB%84%E5%AF%B9%E6%AF%94%E5%9B%BE.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165501.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165516.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165523.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165538.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165556.png">
+<meta property="og:updated_time" content="2017-02-06T14:51:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（五）">
+<meta name="twitter:description" content="前言 这一章主要学习button-group。目的是学习扩展按钮组件的写法，需要先了解前一篇的知识：深度了解bootstrap源码之sass篇（四）。">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/%E5%8A%9F%E8%83%BD%E7%B1%BB%E6%8C%89%E9%92%AE%E7%BB%84%E5%AF%B9%E6%AF%94%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（五） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（五）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-06T22:18:35+08:00" content="2017-02-06">
+              2017-02-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习button-group。目的是学习扩展按钮组件的写法，需要先了解前一篇的知识：<a href="http://u-hey.github.io/2017/01/21/%E6%B7%B1%E5%BA%A6%E4%BA%86%E8%A7%A3bootstrap%E6%BA%90%E7%A0%81%E4%B9%8Bsass%E7%AF%87%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_blank" rel="external">深度了解bootstrap源码之sass篇（四）</a>。</p>
+<a id="more"></a>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> button组件（按钮）的扩展：button-group。分_button-group.scss和一些简单常用的方法(border-radius，clearfix，等)</p>
+<h2 id="使用方法和效果"><a href="#使用方法和效果" class="headerlink" title="使用方法和效果"></a>使用方法和效果</h2><p> 按钮组的样式和功能很丰富，我先将所有的按钮组效果过一遍再看sass，促进消化。官网文档 → <a href="http://v3.bootcss.com/components/#btn-groups" target="_blank" rel="external">按钮组</a>。<br> 总结如下：</p>
+<ul>
+<li>功能类<ul>
+<li><strong>loading状态下的效果</strong><ol>
+<li>实现过程：新增属性data-loading-text，调用bootstrap.js中的button属性实现动态效果。</li>
+<li>实现方法：<code>$(&quot;#domId&quot;).button(&#39;loading&#39;)</code>获取动态文本，<code>...button(&#39;reset&#39;)</code>插入。</li>
+<li>从 v3.3.5 版本开始，此特性不再建议使用，并且已经在 v4 版本中删除了。</li>
+</ol>
+</li>
+<li><strong>checked/radio状态下的效果</strong><ol>
+<li>你必须手动添加<code>.active</code>样式在你的label表单内。</li>
+<li>实现方法：调用button属性方法。</li>
+</ol>
+</li>
+<li><strong>toggle状态下的效果</strong><ol>
+<li>通过<code>.active</code>样式改变的效果。</li>
+<li>实现方法：调用button属性方法。</li>
+</ol>
+</li>
+<li><strong>功能类实例图</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/%E5%8A%9F%E8%83%BD%E7%B1%BB%E6%8C%89%E9%92%AE%E7%BB%84%E5%AF%B9%E6%AF%94%E5%9B%BE.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>效果类<ul>
+<li><strong>普通效果</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165501.png" alt=""> <blockquote>
+<p>所有的按钮组，父元素的class必须有<code>.btn-group</code>,子元素必须继承<code>.btn</code>。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><strong>工具栏样式的效果</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165516.png" alt=""> </li>
+</ul>
+</li>
+<li><strong>不同尺寸的效果</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165523.png" alt=""> </li>
+</ul>
+</li>
+<li><strong>下拉菜单嵌套的效果</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165538.png" alt=""></li>
+</ul>
+</li>
+<li><strong>垂直排列的效果</strong><ul>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170205165556.png" alt=""></li>
+</ul>
+</li>
+<li><strong>两端对齐排列的效果</strong><ul>
+<li>即为横向排列的按钮组，占据文档流的一行。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="clearfix-scss"><a href="#clearfix-scss" class="headerlink" title="_clearfix.scss"></a>_clearfix.scss</h2><p>  源文：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 清除浮动</div><div class="line">// 用于现代浏览器</div><div class="line">// 1 避免来自opera浏览器中contenteditable属性带来相关bug；</div><div class="line">// 2 解决文档流错位bug；</div><div class="line">// 3 使用table属性而不是block能克制子元素的top-margin。</div><div class="line">// 源代码注释给的相关链接 → Source: http://nicolasgallagher.com/micro-clearfix-hack/</div><div class="line">@mixin clearfix() &#123;</div><div class="line">  &amp;:before,</div><div class="line">  &amp;:after &#123;</div><div class="line">    content: &quot; &quot;; // 1</div><div class="line">    display: table; // 2</div><div class="line">  &#125;</div><div class="line">  &amp;:after &#123;</div><div class="line">    clear: both;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="border-radius-scss"><a href="#border-radius-scss" class="headerlink" title="border-radius.scss"></a>border-radius.scss</h2><p>源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 单面边框半径</div><div class="line">//border-radius用于边框四角的弧度，此方法写的分别是上下左右单面的边框半径，用处比较多，代码也易读就不多解释了。border-radius:50%时此元素刚好是个圆形，但是要保证该元素的子元素没有内容。</div><div class="line">@mixin border-top-radius($radius) &#123;</div><div class="line">  border-top-right-radius: $radius;</div><div class="line">   border-top-left-radius: $radius;</div><div class="line">&#125;</div><div class="line">@mixin border-right-radius($radius) &#123;</div><div class="line">  border-bottom-right-radius: $radius;</div><div class="line">     border-top-right-radius: $radius;</div><div class="line">&#125;</div><div class="line">@mixin border-bottom-radius($radius) &#123;</div><div class="line">  border-bottom-right-radius: $radius;</div><div class="line">   border-bottom-left-radius: $radius;</div><div class="line">&#125;</div><div class="line">@mixin border-left-radius($radius) &#123;</div><div class="line">  border-bottom-left-radius: $radius;</div><div class="line">     border-top-left-radius: $radius;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="button-group-scss"><a href="#button-group-scss" class="headerlink" title="button-group.scss"></a>button-group.scss</h2><p> 源文：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div></pre></td><td class="code"><pre><div class="line">// 按钮组基本样式</div><div class="line">.btn-group,</div><div class="line">.btn-group-vertical &#123;</div><div class="line">//使用relative用于下拉菜单组件(dropdown)的定位</div><div class="line">  position: relative;</div><div class="line">  display: inline-block;</div><div class="line">  vertical-align: middle; //按钮(.btn)与字体对准的hack</div><div class="line">  &gt; .btn &#123;</div><div class="line">    position: relative;</div><div class="line">    float: left;</div><div class="line">    // 将.active设置z-index前面防止样式重叠</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;:active,</div><div class="line">    &amp;.active &#123;</div><div class="line">      z-index: 2;</div><div class="line">    &#125;</div><div class="line">    &amp;:focus &#123;</div><div class="line">      // 下拉菜单(dropdown)关闭后移除focus的效果。</div><div class="line">      outline: 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 按钮相邻时防止双边框（2个border)，</div><div class="line">.btn-group &#123;</div><div class="line">  .btn + .btn,</div><div class="line">  //这是一个自定义设置，官网demo用于有下拉菜单式按钮的按钮组。</div><div class="line">  .btn + .btn-group, </div><div class="line">  .btn-group + .btn,</div><div class="line">  .btn-group + .btn-group &#123;</div><div class="line">    margin-left: -1px;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 可选的：工具栏状态下的按钮组，嵌套在`.btn-group`外。这种样式通常用于菜单栏，一行内多组菜单。</div><div class="line">.btn-toolbar &#123;</div><div class="line">  margin-left: -5px; // 偏移第一个子元素的margin属性</div><div class="line">  @include clearfix;// 调用clearfix函数，clearfix：清除浮动。</div><div class="line"></div><div class="line">  .btn-group,</div><div class="line">  .input-group &#123;</div><div class="line">  //看到这里明白为什么官方说btn-toolbar是可选的样式，基本按钮组样式可以实现大部分需求，当文档流的一行存在多个按钮组时使用.btn-toolbar使代码更有可读性，也方便框架统一。不过从css渲染，性能的角度上可以使用更少的代码实现此需求，但这种优化微乎其微。bootstrap真的很赞，适合缺少css架构师的团队使用，方便易读快速成型。</div><div class="line">    float: left;</div><div class="line">  &#125;</div><div class="line">  &gt; .btn,</div><div class="line">  &gt; .btn-group,</div><div class="line">  &gt; .input-group &#123;</div><div class="line">    margin-left: 5px;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 初始化所有按钮组内按钮(不包含第一个和最后一个)的边框圆角为0px（按钮样式(.btn)默认初始边框圆角为5px，如果不记得可以看第四篇。）</div><div class="line">.btn-group &gt; .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) &#123;</div><div class="line">  border-radius: 0;</div><div class="line">&#125;</div><div class="line">/* </div><div class="line"> * ①</div><div class="line">// 设置按钮组的第一个子元素，右上和右下的边框圆角为0px。因为存在按钮组只有一个按钮的情况，因此同时设置:not(:last-child)属性保证元素的正确匹配。所以这一段可以这么理解：当元素为第一个且不为最后一个，或元素样式不为dropdown-toggle时调用函数border-right/left-radius。不为dropdown-toggle是因为有dropdown-toggle样式的元素必须单独被btn-group裹一层。这是一个不错的css技巧，赶紧get！</div><div class="line">.btn-group &gt; .btn:first-child &#123;</div><div class="line">  margin-left: 0;</div><div class="line">  &amp;:not(:last-child):not(.dropdown-toggle) &#123;</div><div class="line">    @include border-right-radius(0);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">.btn-group &gt; .btn:last-child:not(:first-child),</div><div class="line">.btn-group &gt; .dropdown-toggle:not(:first-child) &#123;</div><div class="line">  @include border-left-radius(0);</div><div class="line">&#125;</div><div class="line">*</div><div class="line">*/</div><div class="line"></div><div class="line">// 自定义设置（按钮组嵌套按钮组）</div><div class="line">.btn-group &gt; .btn-group &#123;</div><div class="line">  float: left;</div><div class="line">&#125;</div><div class="line">.btn-group &gt; .btn-group:not(:first-child):not(:last-child) &gt; .btn &#123;</div><div class="line">  border-radius: 0;</div><div class="line">&#125;</div><div class="line">.btn-group &gt; .btn-group:first-child &#123;</div><div class="line">  &gt; .btn:last-child,</div><div class="line">  &gt; .dropdown-toggle &#123;</div><div class="line">    @include border-right-radius(0);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">.btn-group &gt; .btn-group:last-child &gt; .btn:first-child &#123;</div><div class="line">  @include border-left-radius(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 当按钮选中时，不显示outline，这也是清除了.btn的默认样式。</div><div class="line">.btn-group .dropdown-toggle:active,</div><div class="line">.btn-group.open .dropdown-toggle &#123;</div><div class="line">  outline: 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 按钮组尺寸</div><div class="line">// 按钮组的尺寸样式继承.button.scss里的.btn的尺寸样式，.btn的尺寸详情看第四篇(其实也是调用了button-size方法)这种简写更方便修改。</div><div class="line"></div><div class="line">.btn-group-xs &gt; .btn &#123; @extend .btn-xs; &#125;</div><div class="line">.btn-group-sm &gt; .btn &#123; @extend .btn-sm; &#125;</div><div class="line">.btn-group-lg &gt; .btn &#123; @extend .btn-lg; &#125;</div><div class="line"></div><div class="line"></div><div class="line">// 下拉菜单式按钮</div><div class="line">// ----------------------</div><div class="line"></div><div class="line">// 要注意的是，官网demo的下拉菜单状态式按钮单独裹一层btn-group。原因我认为一来保持dom结构的整洁，二来在下拉菜单出现时避免错误定位(btn-group有relative属性)，如果忽略了这一点，会使标记①处的代码段失效。</div><div class="line"></div><div class="line"></div><div class="line">//这里重置默认尺寸和最大尺寸的内间距，仅在下拉菜单式按钮中生效，这种间距设计属于boots，至于为啥这么设计，防止&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;导致内边距加长可能是其中之一的原因，如果去掉这两段间距重置的代码视觉上会有些不对称。</div><div class="line">.btn-group &gt; .btn + .dropdown-toggle &#123;</div><div class="line">  padding-left: 8px;</div><div class="line">  padding-right: 8px;</div><div class="line">&#125;</div><div class="line">.btn-group &gt; .btn-lg + .dropdown-toggle &#123;</div><div class="line">  padding-left: 12px;</div><div class="line">  padding-right: 12px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 下拉菜单激活状态</div><div class="line">// 调用了box-shadow方法覆盖渐变和阴影样式，统一为当前场景的颜色。</div><div class="line">.btn-group.open .dropdown-toggle &#123;</div><div class="line">  @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));</div><div class="line"></div><div class="line">  // 按钮为链接按钮时调用box-shadow方法达到清除阴影和背景渐变的效果</div><div class="line">  &amp;.btn-link &#123;</div><div class="line">    @include box-shadow(none);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 调整caret样式位置，官网用词是Reposition caret。</div><div class="line">// caret是利用inline-block,boder和transparent实现的倒三角</div><div class="line">.btn .caret &#123;</div><div class="line">  margin-left: 0;</div><div class="line">&#125;</div><div class="line">// 设置其它按钮尺寸下的caret样式</div><div class="line">.btn-lg .caret &#123;</div><div class="line">  border-width: $caret-width-large $caret-width-large 0;</div><div class="line">  border-bottom-width: 0;</div><div class="line">&#125;</div><div class="line">// 颠倒.caret → ▲。官网demo用于向上弹出式菜单</div><div class="line">.dropup .btn-lg .caret &#123;</div><div class="line">  border-width: 0 $caret-width-large $caret-width-large;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 垂直按钮组</div><div class="line">// ----------------------</div><div class="line"></div><div class="line">.btn-group-vertical &#123;</div><div class="line">  &gt; .btn,</div><div class="line">  &gt; .btn-group,</div><div class="line">  &gt; .btn-group &gt; .btn &#123;</div><div class="line">    display: block;</div><div class="line">    float: none;</div><div class="line">    width: 100%;</div><div class="line">    max-width: 100%;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 清除浮动，避免多个下拉菜单错位</div><div class="line">  &gt; .btn-group &#123;</div><div class="line">    @include clearfix;</div><div class="line">    &gt; .btn &#123;</div><div class="line">      float: none;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .btn + .btn,</div><div class="line">  &gt; .btn + .btn-group,</div><div class="line">  &gt; .btn-group + .btn,</div><div class="line">  &gt; .btn-group + .btn-group &#123;</div><div class="line">    margin-top: -1px;</div><div class="line">    margin-left: 0;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 原理同代码段①</div><div class="line">.btn-group-vertical &gt; .btn &#123;</div><div class="line">  &amp;:not(:first-child):not(:last-child) &#123;</div><div class="line">    border-radius: 0;</div><div class="line">  &#125;</div><div class="line">  &amp;:first-child:not(:last-child) &#123;</div><div class="line">    border-top-right-radius: $border-radius-base;</div><div class="line">    @include border-bottom-radius(0);</div><div class="line">  &#125;</div><div class="line">  &amp;:last-child:not(:first-child) &#123;</div><div class="line">    border-bottom-left-radius: $border-radius-base;</div><div class="line">    @include border-top-radius(0);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">.btn-group-vertical &gt; .btn-group:not(:first-child):not(:last-child) &gt; .btn &#123;</div><div class="line">  border-radius: 0;</div><div class="line">&#125;</div><div class="line">.btn-group-vertical &gt; .btn-group:first-child:not(:last-child) &#123;</div><div class="line">  &gt; .btn:last-child,</div><div class="line">  &gt; .dropdown-toggle &#123;</div><div class="line">    @include border-bottom-radius(0);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">.btn-group-vertical &gt; .btn-group:last-child:not(:first-child) &gt; .btn:first-child &#123;</div><div class="line">  @include border-top-radius(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 两端对齐按钮组</div><div class="line">// ----------------------</div><div class="line"></div><div class="line">.btn-group-justified &#123;</div><div class="line">  display: table;</div><div class="line">  width: 100%;</div><div class="line">  table-layout: fixed;//表格布局：列宽由表格宽度和列宽度设定。</div><div class="line">  border-collapse: separate;//合并表格边框，使用该属性建议页面规定 !DOCTYPE</div><div class="line">  &gt; .btn,</div><div class="line">  &gt; .btn-group &#123;</div><div class="line">    float: none;</div><div class="line">    display: table-cell;</div><div class="line">    width: 1%; // width决定浏览器计算列宽的方式，如想深入了解。详看</div><div class="line">  &#125;</div><div class="line">  &gt; .btn-group .btn &#123;</div><div class="line">    width: 100%;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .btn-group .dropdown-menu &#123;</div><div class="line">    left: auto; // 初始化下拉菜单的定位，其实在.dropdown-menu中left值本来就是0。不过这样可避免.dropdown-menu对left值的修改影响按钮组嵌套下拉菜单按钮组件的定位。</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 当单复选择按钮遇上下拉菜单</div><div class="line">// 此处为了支持浏览器表单验证功能反馈， 由于`display: none;` or `visibility: hidden;`仍然会隐藏菜单的弹出所以不能使用，于是使用了clip，通过剪辑的方式隐藏。同时屏蔽input点击事件，这样一来能确保下拉菜单能正常弹出</div><div class="line">// 源代码注释给的相关链接 ↓</div><div class="line">// See https://github.com/twbs/bootstrap/pull/12794 and</div><div class="line">// https://github.com/twbs/bootstrap/pull/14559 for more information.</div><div class="line"></div><div class="line">[data-toggle=&quot;buttons&quot;] &#123;</div><div class="line">  &gt; .btn,</div><div class="line">  &gt; .btn-group &gt; .btn &#123;</div><div class="line">    input[type=&quot;radio&quot;],</div><div class="line">    input[type=&quot;checkbox&quot;] &#123;</div><div class="line">      position: absolute;</div><div class="line">      clip: rect(0,0,0,0);//w3c：clip属性剪裁绝对定位元素。看示例：注④</div><div class="line">      pointer-events: none; //元素永远不会成为鼠标事件的target，但是，当其后代元素的pointer-events属性指定其他值时，鼠标事件可以指向后代元素，在这种情况下，鼠标事件将在捕获或冒泡阶触发父元素的事件侦听器。详看注③</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>注② ：<a href="http://note.youdao.com/noteshare?id=c3c4f60ad59d5c9af5e3a48035db117a" target="_blank" rel="external">关于bootstrap框架里btn-group-justified类的解析</a></li>
+<li>注③ ：来自MDN → <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events" target="_blank" rel="external">pointer-events</a></li>
+<li>注④ ：来自W3C → <a href="http://www.w3school.com.cn/tiy/t.asp?f=csse_clip" target="_blank" rel="external">clip的demo</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/06/关于bootstrap框架里btn-group-justified类的解析/" rel="next" title="关于bootstrap框架里btn-group-justified类的解析">
+                <i class="fa fa-chevron-left"></i> 关于bootstrap框架里btn-group-justified类的解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2017/02/06/深度了解bootstrap源码之sass篇（五）/" data-title="深度了解bootstrap源码之sass篇（五）" data-url="http://yoursite.com/2017/02/06/深度了解bootstrap源码之sass篇（五）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法和效果"><span class="nav-number">3.</span> <span class="nav-text">使用方法和效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clearfix-scss"><span class="nav-number">4.</span> <span class="nav-text">_clearfix.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border-radius-scss"><span class="nav-number">5.</span> <span class="nav-text">border-radius.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#button-group-scss"><span class="nav-number">6.</span> <span class="nav-text">button-group.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">7.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
