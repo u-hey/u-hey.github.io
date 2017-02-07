@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ajax," />
+  <meta name="keywords" content="sass,bootstrap," />
 
 
 
@@ -82,16 +82,32 @@
 
 
 
-<meta name="description" content="如何使用ajax。1. 创建一个能链接两个异世界的接口var xmlhttp;">
+<meta name="description" content="前言 这一章主要学习badges。
+研究对象 badges（徽章）组件。
+使用方法和效果  
+  在bootstrap里，徽章通常和其它组件套用，例如 链接按钮、按钮组、菜单等，目的是消息数量提示。
+  使用方法：&amp;lt;span class=&amp;quot;badge&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Ajax(入门)">
-<meta property="og:url" content="http://yoursite.com/2016/04/27/使用Ajax-入门/index.html">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（六）">
+<meta property="og:url" content="http://yoursite.com/2017/02/07/深度了解bootstrap源码之sass篇（六）/index.html">
 <meta property="og:site_name" content="uhey">
-<meta property="og:description" content="如何使用ajax。1. 创建一个能链接两个异世界的接口var xmlhttp;">
-<meta property="og:updated_time" content="2016-05-13T06:16:09.000Z">
+<meta property="og:description" content="前言 这一章主要学习badges。
+研究对象 badges（徽章）组件。
+使用方法和效果  
+  在bootstrap里，徽章通常和其它组件套用，例如 链接按钮、按钮组、菜单等，目的是消息数量提示。
+  使用方法：&amp;lt;span class=&amp;quot;badge&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170207154549.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170207165745.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/%E6%9C%AA%E6%A0%87%E9%A2%98-2.jpg">
+<meta property="og:updated_time" content="2017-02-07T13:00:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Ajax(入门)">
-<meta name="twitter:description" content="如何使用ajax。1. 创建一个能链接两个异世界的接口var xmlhttp;">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（六）">
+<meta name="twitter:description" content="前言 这一章主要学习badges。
+研究对象 badges（徽章）组件。
+使用方法和效果  
+  在bootstrap里，徽章通常和其它组件套用，例如 链接按钮、按钮组、菜单等，目的是消息数量提示。
+  使用方法：&amp;lt;span class=&amp;quot;badge&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170207154549.png">
 
 
 
@@ -109,7 +125,7 @@
   };
 </script>
 
-  <title> 使用Ajax(入门) | uhey </title>
+  <title> 深度了解bootstrap源码之sass篇（六） | uhey </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +265,7 @@
             
             
               
-                使用Ajax(入门)
+                深度了解bootstrap源码之sass篇（六）
               
             
           </h1>
@@ -261,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T15:23:05+08:00" content="2016-04-27">
-              2016-04-27
+            <time itemprop="dateCreated" datetime="2017-02-07T20:58:51+08:00" content="2017-02-07">
+              2017-02-07
             </time>
           </span>
 
@@ -289,28 +305,29 @@
       
 
       
-        <h4 id="如何使用ajax。"><a href="#如何使用ajax。" class="headerlink" title="如何使用ajax。"></a>如何使用ajax。</h4><p><strong>1. 创建一个能链接两个异世界的接口</strong><br><code>var xmlhttp;</code></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习badges。</p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> badges（徽章）组件。</p>
+<h2 id="使用方法和效果"><a href="#使用方法和效果" class="headerlink" title="使用方法和效果"></a>使用方法和效果</h2><p>  <img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170207154549.png" alt=""></p>
+<p>  在bootstrap里，徽章通常和其它组件套用，例如 链接按钮、按钮组、菜单等，目的是消息数量提示。</p>
+<p>  使用方法：<code>&lt;span class=&quot;badge&quot;&gt;1&lt;/span&gt;</code></p>
 <a id="more"></a>
-<p><strong>2. 不同世界用不同的接口</strong><br> <code>if (str.length==0)
-  { 
-  document.getElementById(&quot;txtHint&quot;).innerHTML=&quot;&quot;;
-  return;
-  }
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }</code></p>
-<p><strong>3. 开启世界交互大门</strong><br><code>xmlhttp.onreadystatechange</code></p>
-<p><strong>4. 嘿，对面的，你们那边状态如何？</strong><br><code>xmlhttp.readyState</code> == 4 （I’M OK COME ON!）<br><code>xmlhttp.status</code>  == 200 （I’M OK COME ON!）</p>
-<p>   相关说明：<br>    0: 请求未初始化<br>    1: 服务器连接已建立<br>    2: 请求已接收<br>    3: 请求处理中<br>    4: 请求已完成，且响应已就绪<br>    200: “OK”<br>    404: 未找到页面</p>
-<p><strong>5. 我要他们那边的%￥……%……东西~ <code>//doing</code></strong></p>
-<p><strong>6. 5步骤完毕后发送请求链接</strong><br><code>xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,true);</code></p>
-<p>相关说明：<br><code>open(method,url,async)</code><br>规定请求的类型、URL 以及是否异步处理请求。<br>method：请求的类型；GET 或 POST<br>url：文件在服务器上的位置<br>async：true（异步）或 false（同步）</p>
-<p>为防止缓存可变为<br><code>xmlhttp.open(&quot;GET&quot;,&quot;demo_get.asp?t=&quot; + Math.random(),true);</code><br><code>xmlhttp.send();</code></p>
-<p><strong>7. 点击确认~发射！<code>xmlhttp.send();</code></strong></p>
-<p>相关说明：<br><code>send(string)</code><br>将请求发送到服务器。<br>string：仅用于 POST 请求</p>
-<h4 id="完整的ajax示例"><a href="#完整的ajax示例" class="headerlink" title="完整的ajax示例"></a>完整的ajax示例</h4><p>  <em>//coding以下的部分为请求到数据后的处理 </em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">function showText(str)&#123;</div><div class="line">				//创建ajax对象</div><div class="line">				var xmlHttp = null;</div><div class="line">				//判断是否空值</div><div class="line">				if(str==&quot;&quot;)</div><div class="line">				&#123;</div><div class="line">					//coding</div><div class="line">					document.getElementById(&quot;ID&quot;).innerHTML=&quot;&quot;;</div><div class="line">					return;</div><div class="line">				&#125;</div><div class="line">				//根据不同的浏览器建立不同的接口</div><div class="line">				if(window.XMLHttpRequest)</div><div class="line">				&#123;</div><div class="line">					//IE7+ firefox,chorme,o,safari,webkit</div><div class="line">					xmlHttp = new XMLHttpRequest();</div><div class="line">				&#125;</div><div class="line">				else</div><div class="line">				&#123;</div><div class="line">					// IE6-</div><div class="line">					xmlHttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">				&#125;</div><div class="line">				//主人，我准备好了~ 出发吧</div><div class="line">				xmlHttp.onreadystatechange=function()&#123;</div><div class="line">					//芝麻开门</div><div class="line">					if(xmlHttp.readyState==4 &amp;&amp; xmlHttp.status==200)</div><div class="line">					&#123;</div><div class="line">						//coding</div><div class="line">						document.getElementById(&quot;ID&quot;).innerHTML = xmlHttp.responseText;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				//配置异世界链接隧道</div><div class="line">				xmlHttp.open(&quot;GET&quot;,&quot;AjaxText.php?q=&quot;+str,true);</div><div class="line">				//关闭通道</div><div class="line">				xmlHttp.send();</div><div class="line">			&#125;</div></pre></td></tr></table></figure></p>
-<p>当页面有多个ajax请求时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var xmlhttp;</div><div class="line"></div><div class="line">function loadXMLDoc(url, cfunc) &#123;</div><div class="line">	if (window.XMLHttpRequest) &#123; </div><div class="line">		// code for IE7+, Firefox, Chrome, Opera, Safari</div><div class="line">		xmlhttp = new XMLHttpRequest();</div><div class="line">	&#125; else &#123; </div><div class="line">		// code for IE6, IE5</div><div class="line">		xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">	&#125;</div><div class="line">		xmlhttp.onreadystatechange = cfunc;</div><div class="line">		xmlhttp.open(&quot;GET&quot;, url, true);</div><div class="line">		xmlhttp.send();</div><div class="line">&#125;</div><div class="line"></div><div class="line">function showText(str) &#123;</div><div class="line">	loadXMLDoc(&quot;AjaxText.php?q=&quot; + str, function() &#123;</div><div class="line">		if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) &#123;</div><div class="line">			//coding</div><div class="line">			document.getElementById(&quot;result&quot;).innerHTML = xmlHttp.responseText;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="badges-scss"><a href="#badges-scss" class="headerlink" title="badges.scss"></a>badges.scss</h2><p> 源文：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">// 徽章</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">// 基础样式</div><div class="line">.badge &#123;</div><div class="line">  display: inline-block;</div><div class="line">  min-width: 10px; //设置最小宽度，防止无内容。</div><div class="line">  padding: 3px 7px;</div><div class="line">  font-size: $font-size-small;</div><div class="line">  font-weight: $badge-font-weight;</div><div class="line">  color: $badge-color;</div><div class="line">  line-height: $badge-line-height;</div><div class="line">  vertical-align: baseline; // 注①，vertical-align属性指设置元素的垂直对齐方式，该属性在元素属于inline或是inline-block（table-cell也可以）下才会起作用。</div><div class="line">  white-space: nowrap; // 详看注②，white-space指如何处理元素内的空白，nowrap：文本不会换行，文本会在在同一行上继续，直到遇到 &lt;br&gt; 标签为止。</div><div class="line">  text-align: center;</div><div class="line">  background-color: $badge-bg;</div><div class="line">  border-radius: $badge-border-radius;</div><div class="line"></div><div class="line">  // 无内容的徽章会样式坍塌，不要再IE8下使用，因为 IE8 不支持 :empty 选择符。</div><div class="line">  &amp;:empty &#123;</div><div class="line">    display: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 胶囊式按钮的徽章样式处理</div><div class="line">  .btn &amp; &#123;</div><div class="line">    position: relative;</div><div class="line">    top: -1px;</div><div class="line">  &#125;</div><div class="line">  .btn-xs &amp; &#123;</div><div class="line">    top: 0;</div><div class="line">    padding: 1px 5px;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">  // 设置胶囊式导航内处于激活状态的元素所包含的徽章展示相匹配的样式。</div><div class="line">  a.list-group-item.active &gt; &amp;,</div><div class="line">  .nav-pills &gt; .active &gt; a &gt; &amp; &#123;</div><div class="line">    color: $badge-active-color;</div><div class="line">    background-color: $badge-active-bg;</div><div class="line">  &#125;</div><div class="line">  .nav-pills &gt; li &gt; a &gt; &amp; &#123;</div><div class="line">    margin-left: 3px;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 链接元素激活状态下徽章样式</div><div class="line">a.badge &#123;</div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus &#123;</div><div class="line">    color: $badge-link-hover-color;</div><div class="line">    text-decoration: none;</div><div class="line">    cursor: pointer;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li><p>注①：属性值baseline，</p>
+<blockquote>
+<p>w3c指：元素放置在父元素的基线上</p>
+</blockquote>
+<p>那么，<strong>基线</strong>在哪儿？打开PS(photoshop)，新建一个画布，输入文字，在编辑状态下文字下面不是有根横线么，那就是基线的位置。如图</p>
+<p><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170207165745.png" alt=""></p>
+<p>得知基线后，baseline如何根据基线放置？如图：</p>
+<p><img src="http://7xtha5.com1.z0.glb.clouddn.com/%E6%9C%AA%E6%A0%87%E9%A2%98-2.jpg" alt=""></p>
+<p>同理，延伸一下其它属性值，如 top、texttop、middle、bottom、text-bottom、sub、super。这些属性值<strong>都基于父元素的基线</strong>定位。如果想直接看效果可以去<a href="http://www.zhangxinxu.com/study/201005/verticle-align-test-demo.html" target="_blank" rel="external">张鑫旭前辈的demo</a>，也许你会看到张鑫旭前辈讲述他对vertical-align的理解这篇文章，不过我认为他在对几个属性值定位的总结并不十分准确，可以说是不正确的。供参考是ok的。</p>
+<h3 id="理解计算机是如何计算baseline的，是vertical-align定位的关键。"><a href="#理解计算机是如何计算baseline的，是vertical-align定位的关键。" class="headerlink" title="理解计算机是如何计算baseline的，是vertical-align定位的关键。"></a>理解计算机是如何计算baseline的，是vertical-align定位的关键。</h3><p>经我多番百度得出<strong>父元素的line-height会影响基线的位置，line-height不会撑开元素大小，但在计算过程中，line-height改变了某个区间值，影响了基线位置的计算。所以，你可能会看到，爷爷辈元素line-height值高于父元素固定高宽时，父元素大小没变化，但子元素的sub,super,top,bottom等属性值有明显的不同，额外说明：line-height有具有继承的作用，爷爷辈元素的line-height会被父元素继承，这一点应值得注意。</strong></p>
+<p>关于vertical-align的定位我并没有说全，也说的不是十分准确，请你尽量保持参考态度，尤其在有line-height和vertical-align的关系下，即使经我总结，我也只能认为vertical-align定位是基于baseline的，计算机在计算baseline时line-height也会参与进来。那计算机到底是如何计算baseline的不属本章要点，不过我认为仍值得好好研究一番。</p>
+</li>
+<li><p>注②：<a href="http://www.w3school.com.cn/cssref/pr_text_white-space.asp" target="_blank" rel="external">white-space属性</a>是一个容易叫人忽略的属性，记住这个属性能让你的css代码更显细心。</p>
+</li>
+</ul>
 
       
     </div>
@@ -331,7 +348,9 @@ if (window.XMLHttpRequest)
       
         <div class="post-tags">
           
-            <a href="/tags/Ajax/" rel="tag">#Ajax</a>
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
           
         </div>
       
@@ -340,17 +359,13 @@ if (window.XMLHttpRequest)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/14/简单说说代码加载顺序/" rel="next" title="简单说说代码加载顺序">
-                <i class="fa fa-chevron-left"></i> 简单说说代码加载顺序
+              <a href="/2017/02/06/深度了解bootstrap源码之sass篇（五）/" rel="next" title="深度了解bootstrap源码之sass篇（五）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（五）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/27/图片预加载读取图片尺寸/" rel="prev" title="图片预加载读取图片尺寸">
-                图片预加载读取图片尺寸 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,7 +390,7 @@ if (window.XMLHttpRequest)
 
           
   <div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="2016/04/27/使用Ajax-入门/" data-title="使用Ajax(入门)" data-url="http://yoursite.com/2016/04/27/使用Ajax-入门/"></div>
+	<div class="ds-thread" data-thread-key="2017/02/07/深度了解bootstrap源码之sass篇（六）/" data-title="深度了解bootstrap源码之sass篇（六）" data-url="http://yoursite.com/2017/02/07/深度了解bootstrap源码之sass篇（六）/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"uhey"};
 	(function() {
@@ -558,7 +573,7 @@ var duoshuoQuery = {short_name:"uhey"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用ajax。"><span class="nav-number">1.</span> <span class="nav-text">如何使用ajax。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整的ajax示例"><span class="nav-number">2.</span> <span class="nav-text">完整的ajax示例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法和效果"><span class="nav-number">3.</span> <span class="nav-text">使用方法和效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#badges-scss"><span class="nav-number">4.</span> <span class="nav-text">badges.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">5.</span> <span class="nav-text">相关说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解计算机是如何计算baseline的，是vertical-align定位的关键。"><span class="nav-number">5.1.</span> <span class="nav-text">理解计算机是如何计算baseline的，是vertical-align定位的关键。</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
