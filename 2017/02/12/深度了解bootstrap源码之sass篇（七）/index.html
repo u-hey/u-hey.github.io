@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 这一章主要学习breadcrumb和close和Code。这三分组件的代码量较少，易读。
+研究对象
+breadcrumb（路径导航）
+close（关闭图标）
+Code （pre、kbd、code标签）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（七）">
+<meta property="og:url" content="http://yoursite.com/2017/02/12/深度了解bootstrap源码之sass篇（七）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="前言 这一章主要学习breadcrumb和close和Code。这三分组件的代码量较少，易读。
+研究对象
+breadcrumb（路径导航）
+close（关闭图标）
+Code （pre、kbd、code标签）">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/breadcrumb.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210143012.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182936.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182917.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182911.png">
+<meta property="og:updated_time" content="2017-02-12T08:16:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（七）">
+<meta name="twitter:description" content="前言 这一章主要学习breadcrumb和close和Code。这三分组件的代码量较少，易读。
+研究对象
+breadcrumb（路径导航）
+close（关闭图标）
+Code （pre、kbd、code标签）">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/breadcrumb.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（七） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（七）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-12T16:15:12+08:00" content="2017-02-12">
+              2017-02-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习breadcrumb和close和Code。这三分组件的代码量较少，易读。</p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><ul>
+<li>breadcrumb（路径导航）</li>
+<li>close（关闭图标）</li>
+<li><p>Code （pre、kbd、code标签）</p>
+<a id="more"></a>
+<h2 id="实例图及作用域"><a href="#实例图及作用域" class="headerlink" title="实例图及作用域"></a>实例图及作用域</h2><h3 id="breadcrumb实例图"><a href="#breadcrumb实例图" class="headerlink" title="breadcrumb实例图"></a>breadcrumb实例图</h3><p><img src="http://7xtha5.com1.z0.glb.clouddn.com/breadcrumb.png" alt=""></p>
+<blockquote>
+<p>通常用于表示当前页面在导航结构中的所处层次。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="close实例图"><a href="#close实例图" class="headerlink" title="close实例图"></a>close实例图</h3><p>  <img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210143012.png" alt=""></p>
+<h3 id="Code实例图"><a href="#Code实例图" class="headerlink" title="Code实例图"></a>Code实例图</h3><p>  <img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182936.png" alt=""></p>
+<blockquote>
+<p><pre>标签，inline和block类型都可以。为了正确的展示代码，要将尖括号做转义处理。</pre></p>
+</blockquote>
+<p>  <img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182917.png" alt=""></p>
+<blockquote>
+<p><kbd>标签，inline类型，用于键盘输入表示。</kbd></p>
+</blockquote>
+<p>  <img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170210182911.png" alt=""></p>
+<blockquote>
+<p><code>标签，inline类型，用于展示单行代码</code></p>
+</blockquote>
+<p>  bootstrap里还有<var>和<samp>标签，分别用于显示变量代码和程序输出。</samp></var></p>
+<h2 id="breadcrumb-scss"><a href="#breadcrumb-scss" class="headerlink" title="breadcrumb.scss"></a>breadcrumb.scss</h2><pre><code>源文：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">// 路径导航</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">.breadcrumb &#123;</div><div class="line">  padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;</div><div class="line">  margin-bottom: $line-height-computed;//注① </div><div class="line">  list-style: none;</div><div class="line">  background-color: $breadcrumb-bg;</div><div class="line">  border-radius: $border-radius-base;</div><div class="line"></div><div class="line">  &gt; li &#123;</div><div class="line">	display: inline-block;</div><div class="line"></div><div class="line">	+ li:before &#123;</div><div class="line">	  content: &quot;#&#123;$breadcrumb-separator&#125;\00a0&quot;; //注②： content属性要使用Unicode编码才能显示出想要的&quot;/&quot;字符。#&#123;&#125;：调用带引号的字符串</div><div class="line">	  padding: 0 5px;</div><div class="line">	  color: $breadcrumb-color;</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .active &#123;</div><div class="line">	color: $breadcrumb-active-color;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h2 id="close-scss"><a href="#close-scss" class="headerlink" title="close.scss"></a>close.scss</h2><p>源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">// 关闭图标</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">.close &#123;</div><div class="line">  float: right;</div><div class="line">  font-size: ($font-size-base * 1.5);</div><div class="line">  font-weight: $close-font-weight;</div><div class="line">  line-height: 1; //精准定位的技巧，font-size为文本size的1.5倍，float影响了行高的定位，设置值为1。巧妙的定位在文本中间。</div><div class="line">  color: $close-color;</div><div class="line">  text-shadow: $close-text-shadow;</div><div class="line">  @include opacity(.2);</div><div class="line"></div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus &#123;</div><div class="line">    color: $close-color;</div><div class="line">    text-decoration: none;</div><div class="line">    cursor: pointer;</div><div class="line">    @include opacity(.5);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // bootstrap将close和按钮下的close分离了出来。</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 按钮下的close需要额外一些属性值</div><div class="line">// IOS下的按钮元素会替换锚点定位标签，如果需要锚点定位文本，则需要属性`href=&quot;#&quot;`.</div><div class="line">button.close &#123;</div><div class="line">  padding: 0;</div><div class="line">  cursor: pointer;</div><div class="line">  background: transparent;</div><div class="line">  border: 0;</div><div class="line">  -webkit-appearance: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="code-scss"><a href="#code-scss" class="headerlink" title="code.scss"></a>code.scss</h2><p> 源文：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"> //</div><div class="line">// Code (inline类型、block类型)</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">// inline-block</div><div class="line">code,</div><div class="line">kbd,</div><div class="line">pre,</div><div class="line">samp &#123;</div><div class="line">  font-family: $font-family-monospace;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// code样式 用于inline </div><div class="line">code &#123;</div><div class="line">  padding: 2px 4px;</div><div class="line">  font-size: 90%;</div><div class="line">  color: $code-color;</div><div class="line">  background-color: $code-bg;</div><div class="line">  border-radius: $border-radius-base;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// kbd样式 用于inline</div><div class="line">kbd &#123;</div><div class="line">  padding: 2px 4px;</div><div class="line">  font-size: 90%;</div><div class="line">  color: $kbd-color;</div><div class="line">  background-color: $kbd-bg;</div><div class="line">  border-radius: $border-radius-small;</div><div class="line">  box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);</div><div class="line"></div><div class="line">  kbd &#123;</div><div class="line">    padding: 0;</div><div class="line">    font-size: 100%;</div><div class="line">    font-weight: bold;</div><div class="line">    box-shadow: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// pre样式 用于block</div><div class="line">pre &#123;</div><div class="line">  display: block;</div><div class="line">  padding: (($line-height-computed - 1) / 2);</div><div class="line">  margin: 0 0 ($line-height-computed / 2);</div><div class="line">  font-size: ($font-size-base - 1); // 14px to 13px</div><div class="line">  line-height: $line-height-base;</div><div class="line">  word-break: break-all;</div><div class="line">  word-wrap: break-word;</div><div class="line">  color: $pre-color;</div><div class="line">  background-color: $pre-bg;</div><div class="line">  border: 1px solid $pre-border-color;</div><div class="line">  border-radius: $border-radius-base;</div><div class="line"></div><div class="line">  // 用于多行代码</div><div class="line">  code &#123;</div><div class="line">    padding: 0;</div><div class="line">    font-size: inherit;</div><div class="line">    color: inherit;</div><div class="line">    white-space: pre-wrap; //正常换行、保留空白</div><div class="line">    background-color: transparent;</div><div class="line">    border-radius: 0;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 可横向滚动的代码块。</div><div class="line">.pre-scrollable &#123;</div><div class="line">  max-height: $pre-scrollable-max-height; //默认340px</div><div class="line">  overflow-y: scroll; // 支持横向滚动</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>注①：<ul>
+<li>行高默认值计算方式： floor(($font-size-base * $line-height-base)) !default;</li>
+<li>floor(),向下取整。</li>
+<li>$font-size-base为14px 默认</li>
+<li>$line-height-base为 1.428571429 默认</li>
+<li>变量$line-height-computed用于设置margin值、padding值。</li>
+</ul>
+</li>
+<li>注②：<ul>
+<li>#{} 用于调用带引号的字符串；</li>
+<li>\00a0是Unicode编码。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/07/深度了解bootstrap源码之sass篇（六）/" rel="next" title="深度了解bootstrap源码之sass篇（六）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（六）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2017/02/12/深度了解bootstrap源码之sass篇（七）/" data-title="深度了解bootstrap源码之sass篇（七）" data-url="http://yoursite.com/2017/02/12/深度了解bootstrap源码之sass篇（七）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例图及作用域"><span class="nav-number">3.</span> <span class="nav-text">实例图及作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#breadcrumb实例图"><span class="nav-number">3.1.</span> <span class="nav-text">breadcrumb实例图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close实例图"><span class="nav-number">3.2.</span> <span class="nav-text">close实例图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code实例图"><span class="nav-number">3.3.</span> <span class="nav-text">Code实例图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#breadcrumb-scss"><span class="nav-number">4.</span> <span class="nav-text">breadcrumb.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close-scss"><span class="nav-number">5.</span> <span class="nav-text">close.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code-scss"><span class="nav-number">6.</span> <span class="nav-text">code.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">7.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
