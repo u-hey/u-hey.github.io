@@ -1,0 +1,702 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="sass,bootstrap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="uhey" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 这一章主要学习carousel（轮播），bootstrap的又一个大模块组件。
+研究对象carousel.scss（轮播图）、_vendor-prefixes.scss（animated动画mixin）、_opacity.scss（透明度mixin）、_gradients.scss（线性渐变mixin）、_image.scss(响应式图片mixin)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（十）">
+<meta property="og:url" content="http://yoursite.com/2017/03/02/深度了解bootstrap源码之sass篇（十）/index.html">
+<meta property="og:site_name" content="uhey">
+<meta property="og:description" content="前言 这一章主要学习carousel（轮播），bootstrap的又一个大模块组件。
+研究对象carousel.scss（轮播图）、_vendor-prefixes.scss（animated动画mixin）、_opacity.scss（透明度mixin）、_gradients.scss（线性渐变mixin）、_image.scss(响应式图片mixin)">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170222162235.png">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170222162551.png">
+<meta property="og:updated_time" content="2017-03-02T13:32:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（十）">
+<meta name="twitter:description" content="前言 这一章主要学习carousel（轮播），bootstrap的又一个大模块组件。
+研究对象carousel.scss（轮播图）、_vendor-prefixes.scss（animated动画mixin）、_opacity.scss（透明度mixin）、_gradients.scss（线性渐变mixin）、_image.scss(响应式图片mixin)">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170222162235.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6278137028064314000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 深度了解bootstrap源码之sass篇（十） | uhey </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">uhey</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">uhey's blog</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="http://www.u-hey.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-coffee fa-fw"></i> <br />
+            
+            生活
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度了解bootstrap源码之sass篇（十）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-02T21:31:09+08:00" content="2017-03-02">
+              2017-03-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习carousel（轮播），bootstrap的又一个大模块组件。</p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p>carousel.scss（轮播图）、_vendor-prefixes.scss（animated动画mixin）、_opacity.scss（透明度mixin）、_gradients.scss（线性渐变mixin）、_image.scss(响应式图片mixin)</p>
+<a id="more"></a>
+<h2 id="示例图与使用方法"><a href="#示例图与使用方法" class="headerlink" title="示例图与使用方法"></a>示例图与使用方法</h2><p> 图例：</p>
+<ul>
+<li><p><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170222162235.png" alt=""></p>
+<p>使用方法：</p>
+</li>
+<li><img src="http://7xtha5.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170222162551.png" alt=""></li>
+</ul>
+<h2 id="vendor-prefixes-scss"><a href="#vendor-prefixes-scss" class="headerlink" title="_vendor-prefixes.scss"></a>_vendor-prefixes.scss</h2><p>源文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div></pre></td><td class="code"><pre><div class="line">// Vendor Prefixes</div><div class="line">//</div><div class="line">// Vendor-Prefixes于v3.2.0版本过时，将在4.0版本中删除以下</div><div class="line"></div><div class="line">// - Animations 动画</div><div class="line">// - Backface visibility 背景能见度</div><div class="line">// - Box shadow 盒子阴影</div><div class="line">// - Box sizing 盒子尺寸</div><div class="line">// - Content columns columns内容布局</div><div class="line">// - Hyphens</div><div class="line">// - Placeholder text 提示文本</div><div class="line">// - Transformations 变换</div><div class="line">// - Transitions 转换</div><div class="line">// - User Select 用户选择</div><div class="line"></div><div class="line"></div><div class="line">// Animation css3属性，定义div与动画绑定</div><div class="line">// 语法→ animation: name duration timing-function delay iteration-count direction;</div><div class="line">@mixin animation($animation) &#123;</div><div class="line">  -webkit-animation: $animation;</div><div class="line">       -o-animation: $animation;</div><div class="line">          animation: $animation;</div><div class="line">&#125;</div><div class="line">// 规定需要绑定到选择器的 keyframe 名称</div><div class="line">@mixin animation-name($name) &#123;</div><div class="line">  -webkit-animation-name: $name;</div><div class="line">          animation-name: $name;</div><div class="line">&#125;</div><div class="line">// 规定完成动画所花费的时间，以秒或毫秒计。</div><div class="line">// 值为0时，不会播放动画</div><div class="line">@mixin animation-duration($duration) &#123;</div><div class="line">  -webkit-animation-duration: $duration;</div><div class="line">          animation-duration: $duration;</div><div class="line">&#125;</div><div class="line">// 规定动画的速度曲线。</div><div class="line">//linear：动画从头到尾的速度是相同的。</div><div class="line">// ease：默认。动画以低速开始，然后加快，在结束前变慢。</div><div class="line">// ease-in：	动画以低速开始。</div><div class="line">// ease-out：动画以低速结束。</div><div class="line">// ease-in-out：	动画以低速开始和结束。</div><div class="line">// cubic-bezier(n,n,n,n)：在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值。</div><div class="line">@mixin animation-timing-function($timing-function) &#123;</div><div class="line">  -webkit-animation-timing-function: $timing-function;</div><div class="line">          animation-timing-function: $timing-function;</div><div class="line">&#125;</div><div class="line">// 	规定在动画开始之前的延迟。 可为负数。</div><div class="line">//  可自己规定次数</div><div class="line">//  infinite:无限次</div><div class="line">@mixin animation-delay($delay) &#123;</div><div class="line">  -webkit-animation-delay: $delay;</div><div class="line">          animation-delay: $delay;</div><div class="line">&#125;</div><div class="line">// 规定动画应该播放的次数。</div><div class="line">@mixin animation-iteration-count($iteration-count) &#123;</div><div class="line">  -webkit-animation-iteration-count: $iteration-count;</div><div class="line">          animation-iteration-count: $iteration-count;</div><div class="line">&#125;</div><div class="line">// 规定是否应该轮流反向播放动画。这个属性好6666,以上属性组合搭配css很炫</div><div class="line">// http://www.w3school.com.cn/cssref/pr_animation-direction.asp</div><div class="line">// normal:正常播放</div><div class="line">// alternate: 轮流反向播放</div><div class="line">@mixin animation-direction($direction) &#123;</div><div class="line">  -webkit-animation-direction: $direction;</div><div class="line">          animation-direction: $direction;</div><div class="line">&#125;</div><div class="line">// 规定动画在播放之前或之后，其动画效果是否可见。</div><div class="line">// none 不改变默认行为；</div><div class="line">//forwards：当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）。</div><div class="line">//backwards：在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）。</div><div class="line">// both：向前和向后填充模式都被应用。</div><div class="line">@mixin animation-fill-mode($fill-mode) &#123;</div><div class="line">  -webkit-animation-fill-mode: $fill-mode;</div><div class="line">          animation-fill-mode: $fill-mode;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Backface-visibility属性定义当元素不面向屏幕时是否可见</div><div class="line">// visible:元素可见</div><div class="line">// hidden：元素不可见</div><div class="line">// 预防三维transforms CSS样式，比如transform:rotateY(180deg)元素以三维的模式旋转180读时，backface-visibility值为hidden则这个元素被隐藏</div><div class="line"></div><div class="line">@mixin backface-visibility($visibility)&#123;</div><div class="line">  -webkit-backface-visibility: $visibility;</div><div class="line">     -moz-backface-visibility: $visibility;</div><div class="line">          backface-visibility: $visibility;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 下拉阴影</div><div class="line">//</div><div class="line">// 截止至3.1.0版本，不需要再用box-shadow()方法，各浏览器已支持box-shadow属性了。</div><div class="line"></div><div class="line">@mixin box-shadow($shadow...) &#123;</div><div class="line">  -webkit-box-shadow: $shadow; // iOS &lt;4.3 &amp; Android &lt;4.1</div><div class="line">          box-shadow: $shadow;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// box-sizing相当于规定了box的计算方式。</div><div class="line">// border-box:元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。通俗的说你设置的width和height包含了你的padding和border。</div><div class="line">// content-box:CSS2.1 规定，也是我们默认的box计算方式。</div><div class="line">// inherit: 继承父元素属性值</div><div class="line">// bootstrap里的所有box，几乎都被border-box了，这样会影响计算机计算速度。</div><div class="line">@mixin box-sizing($boxmodel) &#123;</div><div class="line">  -webkit-box-sizing: $boxmodel;</div><div class="line">     -moz-box-sizing: $boxmodel;</div><div class="line">          box-sizing: $boxmodel;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// CSS3  Columns，简写属性，用于设置列宽和列数，兼容到IE10，9以及9之前是不支持的</div><div class="line">// columns: column-width column-count;</div><div class="line">// Column-count:把 div 元素中的文本划分为三列。</div><div class="line">// Column-gap:将 div 元素中的文本分为三列，并列间 30 像素的间隔。</div><div class="line">// Column-rule:规定列之间的宽度、样式和颜色。</div><div class="line">@mixin content-columns($column-count, $column-gap: $grid-gutter-width) &#123;</div><div class="line">  -webkit-column-count: $column-count;</div><div class="line">     -moz-column-count: $column-count;</div><div class="line">          column-count: $column-count;</div><div class="line">  -webkit-column-gap: $column-gap; // 30px 默认值</div><div class="line">     -moz-column-gap: $column-gap;</div><div class="line">          column-gap: $column-gap;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 可选的连字符</div><div class="line">// 设置浏览器如何断字时换行 【注①】</div><div class="line">@mixin hyphens($mode: auto) &#123;</div><div class="line">  word-wrap: break-word;</div><div class="line">  -webkit-hyphens: $mode;</div><div class="line">     -moz-hyphens: $mode;</div><div class="line">      -ms-hyphens: $mode; // IE10+</div><div class="line">       -o-hyphens: $mode;</div><div class="line">          hyphens: $mode;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Placeholder(占位符)</div><div class="line">@mixin placeholder($color: $input-color-placeholder) &#123;</div><div class="line">  // Firefox</div><div class="line">  &amp;::-moz-placeholder &#123;</div><div class="line">    color: $color;</div><div class="line">    opacity: 1; // bootstrap手滑了~/坏笑 注： https://github.com/twbs/bootstrap/pull/11526</div><div class="line">  &#125;</div><div class="line">  &amp;:-ms-input-placeholder &#123; color: $color; &#125; // Internet Explorer 10+</div><div class="line">  &amp;::-webkit-input-placeholder  &#123; color: $color; &#125; // Safari and Chrome</div><div class="line">&#125;</div><div class="line"></div><div class="line">// transform 值比较多【注②】</div><div class="line">@mixin scale($ratio...) &#123;</div><div class="line">  -webkit-transform: scale($ratio);</div><div class="line">      -ms-transform: scale($ratio); // IE9 only</div><div class="line">       -o-transform: scale($ratio);</div><div class="line">          transform: scale($ratio);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@mixin scaleX($ratio) &#123;</div><div class="line">  -webkit-transform: scaleX($ratio);</div><div class="line">      -ms-transform: scaleX($ratio); // IE9 only</div><div class="line">       -o-transform: scaleX($ratio);</div><div class="line">          transform: scaleX($ratio);</div><div class="line">&#125;</div><div class="line">@mixin scaleY($ratio) &#123;</div><div class="line">  -webkit-transform: scaleY($ratio);</div><div class="line">      -ms-transform: scaleY($ratio); // IE9 only</div><div class="line">       -o-transform: scaleY($ratio);</div><div class="line">          transform: scaleY($ratio);</div><div class="line">&#125;</div><div class="line">@mixin skew($x, $y) &#123;</div><div class="line">  -webkit-transform: skewX($x) skewY($y);</div><div class="line">      -ms-transform: skewX($x) skewY($y); // See https://github.com/twbs/bootstrap/issues/4885; IE9+</div><div class="line">       -o-transform: skewX($x) skewY($y);</div><div class="line">          transform: skewX($x) skewY($y);</div><div class="line">&#125;</div><div class="line">@mixin translate($x, $y) &#123;</div><div class="line">  -webkit-transform: translate($x, $y);</div><div class="line">      -ms-transform: translate($x, $y); // IE9 only</div><div class="line">       -o-transform: translate($x, $y);</div><div class="line">          transform: translate($x, $y);</div><div class="line">&#125;</div><div class="line">@mixin translate3d($x, $y, $z) &#123;</div><div class="line">  -webkit-transform: translate3d($x, $y, $z);</div><div class="line">          transform: translate3d($x, $y, $z);</div><div class="line">&#125;</div><div class="line">@mixin rotate($degrees) &#123;</div><div class="line">  -webkit-transform: rotate($degrees);</div><div class="line">      -ms-transform: rotate($degrees); // IE9 only</div><div class="line">       -o-transform: rotate($degrees);</div><div class="line">          transform: rotate($degrees);</div><div class="line">&#125;</div><div class="line">@mixin rotateX($degrees) &#123;</div><div class="line">  -webkit-transform: rotateX($degrees);</div><div class="line">      -ms-transform: rotateX($degrees); // IE9 only</div><div class="line">       -o-transform: rotateX($degrees);</div><div class="line">          transform: rotateX($degrees);</div><div class="line">&#125;</div><div class="line">@mixin rotateY($degrees) &#123;</div><div class="line">  -webkit-transform: rotateY($degrees);</div><div class="line">      -ms-transform: rotateY($degrees); // IE9 only</div><div class="line">       -o-transform: rotateY($degrees);</div><div class="line">          transform: rotateY($degrees);</div><div class="line">&#125;</div><div class="line">@mixin perspective($perspective) &#123;</div><div class="line">  -webkit-perspective: $perspective;</div><div class="line">     -moz-perspective: $perspective;</div><div class="line">          perspective: $perspective;</div><div class="line">&#125;</div><div class="line">@mixin perspective-origin($perspective) &#123;</div><div class="line">  -webkit-perspective-origin: $perspective;</div><div class="line">     -moz-perspective-origin: $perspective;</div><div class="line">          perspective-origin: $perspective;</div><div class="line">&#125;</div><div class="line">@mixin transform-origin($origin) &#123;</div><div class="line">  -webkit-transform-origin: $origin;</div><div class="line">     -moz-transform-origin: $origin;</div><div class="line">      -ms-transform-origin: $origin; // IE9 only</div><div class="line">          transform-origin: $origin;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// Transitions 【注③】</div><div class="line"></div><div class="line">@mixin transition($transition...) &#123;</div><div class="line">  -webkit-transition: $transition;</div><div class="line">       -o-transition: $transition;</div><div class="line">          transition: $transition;</div><div class="line">&#125;</div><div class="line">@mixin transition-property($transition-property...) &#123;</div><div class="line">  -webkit-transition-property: $transition-property;</div><div class="line">          transition-property: $transition-property;</div><div class="line">&#125;</div><div class="line">@mixin transition-delay($transition-delay) &#123;</div><div class="line">  -webkit-transition-delay: $transition-delay;</div><div class="line">          transition-delay: $transition-delay;</div><div class="line">&#125;</div><div class="line">@mixin transition-duration($transition-duration...) &#123;</div><div class="line">  -webkit-transition-duration: $transition-duration;</div><div class="line">          transition-duration: $transition-duration;</div><div class="line">&#125;</div><div class="line">@mixin transition-timing-function($timing-function) &#123;</div><div class="line">  -webkit-transition-timing-function: $timing-function;</div><div class="line">          transition-timing-function: $timing-function;</div><div class="line">&#125;</div><div class="line">@mixin transition-transform($transition...) &#123;</div><div class="line">  -webkit-transition: -webkit-transform $transition;</div><div class="line">     -moz-transition: -moz-transform $transition;</div><div class="line">       -o-transition: -o-transform $transition;</div><div class="line">          transition: transform $transition;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// User select</div><div class="line">// 用户选中文本样式，比如你要复制一段文本，在赋值之前要选择这段文本，此属性用于设置选中的文本显示的样式。</div><div class="line"></div><div class="line">@mixin user-select($select) &#123;</div><div class="line">  -webkit-user-select: $select;</div><div class="line">     -moz-user-select: $select;</div><div class="line">      -ms-user-select: $select; // IE10+</div><div class="line">          user-select: $select;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="opacity-scss"><a href="#opacity-scss" class="headerlink" title="_opacity.scss"></a>_opacity.scss</h2><p>源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Opacity opacity透明度，兼容到IE8，拿来即用~</div><div class="line"></div><div class="line">@mixin opacity($opacity) &#123;</div><div class="line">  opacity: $opacity;</div><div class="line">  // IE8 filter</div><div class="line">  $opacity-ie: ($opacity * 100);</div><div class="line">  filter: #&#123;alpha(opacity=$opacity-ie)&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="gradients-scss"><a href="#gradients-scss" class="headerlink" title="_gradients.scss"></a>_gradients.scss</h2><p>源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">// Gradients(线性渐变方法集合)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 水平状渐变。</div><div class="line">// 这里应注意不同浏览器下的兼容写法。</div><div class="line">// 创建两个颜色值分别代表开始颜色和结束颜色，不支持IE9以下(不含IE9)；</div><div class="line">@mixin gradient-horizontal($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) &#123;</div><div class="line">  background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Safari 5.1-6, Chrome 10+</div><div class="line">  background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Opera 12</div><div class="line">  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+</div><div class="line">  background-repeat: repeat-x;</div><div class="line">  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&apos;#&#123;ie-hex-str($start-color)&#125;&apos;, endColorstr=&apos;#&#123;ie-hex-str($end-color)&#125;&apos;, GradientType=1); // IE9 and down</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 垂直状渐变。</div><div class="line">// 创建两个颜色值分别代表开始颜色和结束颜色，不支持IE9以下(不含IE9)</div><div class="line">@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) &#123;</div><div class="line">  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Safari 5.1-6, Chrome 10+</div><div class="line">  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Opera 12</div><div class="line">  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+</div><div class="line">  background-repeat: repeat-x;</div><div class="line">  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&apos;#&#123;ie-hex-str($start-color)&#125;&apos;, endColorstr=&apos;#&#123;ie-hex-str($end-color)&#125;&apos;, GradientType=0); // IE9 and down</div><div class="line">&#125;</div><div class="line">// 自定义角度 ，默认45°；单位是deg。【注⑤】</div><div class="line">@mixin gradient-directional($start-color: #555, $end-color: #333, $deg: 45deg) &#123;</div><div class="line">  background-repeat: repeat-x;</div><div class="line">  background-image: -webkit-linear-gradient($deg, $start-color, $end-color); // Safari 5.1-6, Chrome 10+</div><div class="line">  background-image: -o-linear-gradient($deg, $start-color, $end-color); // Opera 12</div><div class="line">  background-image: linear-gradient($deg, $start-color, $end-color); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+</div><div class="line">&#125;</div><div class="line">// 三种颜色的水平渐变</div><div class="line">@mixin gradient-horizontal-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) &#123;</div><div class="line">  background-image: -webkit-linear-gradient(left, $start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-image: -o-linear-gradient(left, $start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-image: linear-gradient(to right, $start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-repeat: no-repeat;</div><div class="line">  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&apos;#&#123;ie-hex-str($start-color)&#125;&apos;, endColorstr=&apos;#&#123;ie-hex-str($end-color)&#125;&apos;, GradientType=1); // IE9 and down, gets no color-stop at all for proper fallback</div><div class="line">&#125;</div><div class="line">// 三种颜色的垂直渐变</div><div class="line">@mixin gradient-vertical-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) &#123;</div><div class="line">  background-image: -webkit-linear-gradient($start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-image: -o-linear-gradient($start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);</div><div class="line">  background-repeat: no-repeat;</div><div class="line">  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&apos;#&#123;ie-hex-str($start-color)&#125;&apos;, endColorstr=&apos;#&#123;ie-hex-str($end-color)&#125;&apos;, GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback</div><div class="line">&#125;</div><div class="line">// 径向渐变</div><div class="line">@mixin gradient-radial($inner-color: #555, $outer-color: #333) &#123;</div><div class="line">  background-image: -webkit-radial-gradient(circle, $inner-color, $outer-color);</div><div class="line">  background-image: radial-gradient(circle, $inner-color, $outer-color);</div><div class="line">  background-repeat: no-repeat;</div><div class="line">&#125;</div><div class="line">// 条纹渐变</div><div class="line">@mixin gradient-striped($color: rgba(255,255,255,.15), $angle: 45deg) &#123;</div><div class="line">  background-image: -webkit-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);</div><div class="line">  background-image: -o-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);</div><div class="line">  background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="image-scss"><a href="#image-scss" class="headerlink" title="_image.scss"></a>_image.scss</h2><p>源文：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// Image Mixins</div><div class="line">// - 响应式图片</div><div class="line">// - 视觉效果</div><div class="line"></div><div class="line">// 响应式 image</div><div class="line">//</div><div class="line">// 根据父元素的宽高自动缩放图片</div><div class="line">@mixin img-responsive($display: block) &#123;</div><div class="line">  display: $display;</div><div class="line">  max-width: 100%; // Part 1: 设置一个相对于父元素的宽度</div><div class="line">  height: auto; // Part 2: 根据宽度缩放高度，否则拉伸图片</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// Retina image 注⑥</div><div class="line">// 这里暂时放着，有待研究。</div><div class="line">// Short retina mixin for setting background-image and -size. Note that the</div><div class="line">// spelling of `min--moz-device-pixel-ratio` is intentional.</div><div class="line">@mixin img-retina($file-1x, $file-2x, $width-1x, $height-1x) &#123;</div><div class="line">  background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path(&quot;#&#123;$file-1x&#125;&quot;), &quot;#&#123;$file-1x&#125;&quot;));</div><div class="line"></div><div class="line">  @media</div><div class="line">  only screen and (-webkit-min-device-pixel-ratio: 2),</div><div class="line">  only screen and (   min--moz-device-pixel-ratio: 2),</div><div class="line">  only screen and (     -o-min-device-pixel-ratio: 2/1),</div><div class="line">  only screen and (        min-device-pixel-ratio: 2),</div><div class="line">  only screen and (                min-resolution: 192dpi),</div><div class="line">  only screen and (                min-resolution: 2dppx) &#123;</div><div class="line">    background-image: url(if($bootstrap-sass-asset-helper, twbs-image-path(&quot;#&#123;$file-2x&#125;&quot;), &quot;#&#123;$file-2x&#125;&quot;));</div><div class="line">    background-size: $width-1x $height-1x;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="carousel-scss"><a href="#carousel-scss" class="headerlink" title="carousel.scss"></a>carousel.scss</h2><p>   源文：<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div></pre></td><td class="code"><pre><div class="line">   //</div><div class="line">// 轮播组件、不支持嵌套的轮播。</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">// 轮播图容器和指示器的封装</div><div class="line">.carousel &#123;</div><div class="line">  position: relative;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 轮播图容器</div><div class="line">.carousel-inner &#123;</div><div class="line">  position: relative;</div><div class="line">  overflow: hidden;</div><div class="line">  width: 100%;</div><div class="line"></div><div class="line">  &gt; .item &#123;</div><div class="line">    display: none;</div><div class="line">    position: relative;</div><div class="line">    @include transition(.6s ease-in-out left);</div><div class="line"></div><div class="line">    // Account for jankitude on images</div><div class="line">    &gt; img,</div><div class="line">    &gt; a &gt; img &#123;</div><div class="line">      @include img-responsive;</div><div class="line">      line-height: 1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // WebKit内核下 CSS3 transforms 兼容设置。【注④】</div><div class="line">    @media all and (transform-3d), (-webkit-transform-3d) &#123;</div><div class="line">      transition: transform .6s ease-in-out;</div><div class="line">      backface-visibility: hidden;</div><div class="line">      perspective: 1000; // 设置元素被查看位置的视图：目前没有浏览器支持，Chrome 和 Safari 支持替代的 -webkit-perspective 属性。W3C要求与 perspective-origin 配合享用。</div><div class="line"></div><div class="line">      &amp;.next,</div><div class="line">      &amp;.active.right &#123;</div><div class="line">        transform: translate3d(100%, 0, 0);</div><div class="line">        left: 0;</div><div class="line">      &#125;</div><div class="line">      &amp;.prev,</div><div class="line">      &amp;.active.left &#123;</div><div class="line">        transform: translate3d(-100%, 0, 0);</div><div class="line">        left: 0;</div><div class="line">      &#125;</div><div class="line">      &amp;.next.left,</div><div class="line">      &amp;.prev.right,</div><div class="line">      &amp;.active &#123;</div><div class="line">        transform: translate3d(0, 0, 0);</div><div class="line">        left: 0;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 这里不是特别的肯定，规定了轮播图容器内左右两边的部分元素样式(没咋看明白其实)。</div><div class="line">  &gt; .active,</div><div class="line">  &gt; .next,</div><div class="line">  &gt; .prev &#123;</div><div class="line">    display: block;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .active &#123;</div><div class="line">    left: 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .next,</div><div class="line">  &gt; .prev &#123;</div><div class="line">    position: absolute;</div><div class="line">    top: 0;</div><div class="line">    width: 100%;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .next &#123;</div><div class="line">    left: 100%;</div><div class="line">  &#125;</div><div class="line">  &gt; .prev &#123;</div><div class="line">    left: -100%;</div><div class="line">  &#125;</div><div class="line">  &gt; .next.left,</div><div class="line">  &gt; .prev.right &#123;</div><div class="line">    left: 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  &gt; .active.left &#123;</div><div class="line">    left: -100%;</div><div class="line">  &#125;</div><div class="line">  &gt; .active.right &#123;</div><div class="line">    left: 100%;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">// 轮播图左/右nav控制器</div><div class="line">// ---------------------------</div><div class="line"></div><div class="line">.carousel-control &#123;</div><div class="line">  position: absolute;</div><div class="line">  top: 0;</div><div class="line">  left: 0;</div><div class="line">  bottom: 0;</div><div class="line">  width: $carousel-control-width;</div><div class="line">  @include opacity($carousel-control-opacity);</div><div class="line">  font-size: $carousel-control-font-size;</div><div class="line">  color: $carousel-control-color;</div><div class="line">  text-align: center;</div><div class="line">  text-shadow: $carousel-text-shadow;</div><div class="line">  // 如果元素有animate动作，webkit不能完美的实现transition，</div><div class="line"></div><div class="line">  // 设置背景梯度(过渡效果)</div><div class="line">  &amp;.left &#123;</div><div class="line">    @include gradient-horizontal($start-color: rgba(0,0,0,.5), $end-color: rgba(0,0,0,.0001));</div><div class="line">  &#125;</div><div class="line">  &amp;.right &#123;</div><div class="line">    left: auto;</div><div class="line">    right: 0;</div><div class="line">    @include gradient-horizontal($start-color: rgba(0,0,0,.0001), $end-color: rgba(0,0,0,.5));</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // Hover/focus 样式</div><div class="line">  &amp;:hover,</div><div class="line">  &amp;:focus &#123;</div><div class="line">    outline: 0;</div><div class="line">    color: $carousel-control-color; // #fff</div><div class="line">    text-decoration: none;</div><div class="line">    @include opacity(.9);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // Toggles  左右两端的按钮图标。</div><div class="line">  .icon-prev,</div><div class="line">  .icon-next,</div><div class="line">  .glyphicon-chevron-left,</div><div class="line">  .glyphicon-chevron-right &#123;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    z-index: 5;</div><div class="line">    display: inline-block;</div><div class="line">  &#125;</div><div class="line">  .icon-prev,</div><div class="line">  .glyphicon-chevron-left &#123;</div><div class="line">    left: 50%;</div><div class="line">    margin-left: -10px;</div><div class="line">  &#125;</div><div class="line">  .icon-next,</div><div class="line">  .glyphicon-chevron-right &#123;</div><div class="line">    right: 50%;</div><div class="line">    margin-right: -10px;</div><div class="line">  &#125;</div><div class="line">  .icon-prev,</div><div class="line">  .icon-next &#123;</div><div class="line">    width:  20px;</div><div class="line">    height: 20px;</div><div class="line">    margin-top: -10px;</div><div class="line">    font-family: serif;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">  .icon-prev &#123;</div><div class="line">    &amp;:before &#123;</div><div class="line">      content: &apos;\2039&apos;;// SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  .icon-next &#123;</div><div class="line">    &amp;:before &#123;</div><div class="line">      content: &apos;\203a&apos;;// SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 圆点图标样式</div><div class="line">//</div><div class="line">// bootstrap设置了一个无序列表用于装载这个圆圈，在JS里点点击该圆圈会滑动到指定index轮播图上。</div><div class="line"></div><div class="line">.carousel-indicators &#123;</div><div class="line">  position: absolute;</div><div class="line">  bottom: 10px;</div><div class="line">  left: 50%;</div><div class="line">  z-index: 15;</div><div class="line">  width: 60%;</div><div class="line">  margin-left: -30%;</div><div class="line">  padding-left: 0;</div><div class="line">  list-style: none;</div><div class="line">  text-align: center;</div><div class="line"></div><div class="line">  li &#123;</div><div class="line">    display: inline-block;</div><div class="line">    width:  10px;</div><div class="line">    height: 10px;</div><div class="line">    margin: 1px;</div><div class="line">    text-indent: -999px;</div><div class="line">    border: 1px solid $carousel-indicator-border-color;</div><div class="line">    border-radius: 10px;</div><div class="line">    cursor: pointer;</div><div class="line"></div><div class="line">    // 触发事件行为下IE8-9的hack</div><div class="line">    // IE8-9不支持透明度，同时也不能使用filter，因为filter对应的透明色是浏览器背景色，而轮播图的圆圈透明背景应该对应的是轮播图色。</div><div class="line">    //</div><div class="line">    // IE8下直接设置纯黑色用于不支持的rgba()。</div><div class="line">    // IE9下的最佳结果可能是alpha透明度</div><div class="line">    background-color: #000 \9; // IE8</div><div class="line">    background-color: rgba(0,0,0,0); // IE9</div><div class="line">  &#125;</div><div class="line">  .active &#123;</div><div class="line">    margin: 0;</div><div class="line">    width:  12px;</div><div class="line">    height: 12px;</div><div class="line">    background-color: $carousel-indicator-active-bg; // #fff 默认</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 轮播图字幕</div><div class="line">// -----------------------------</div><div class="line">//浏览器可视区较小时该字幕会隐藏。</div><div class="line">.carousel-caption &#123;</div><div class="line">  position: absolute;</div><div class="line">  left: 15%; // 防止字幕在左右两端(前/后页按钮)被阴影遮住。</div><div class="line">  right: 15%;</div><div class="line">  bottom: 20px;</div><div class="line">  z-index: 10;</div><div class="line">  padding-top: 20px;</div><div class="line">  padding-bottom: 20px;</div><div class="line">  color: $carousel-caption-color; // 默认白色</div><div class="line">  text-align: center;</div><div class="line">  text-shadow: $carousel-text-shadow; // 默认透明度为0.6的黑色rgb值是(0,0,0,0.6)</div><div class="line">  &amp; .btn &#123;</div><div class="line">    text-shadow: none; // 取消了带按钮的字幕里的阴影。bootstrap默认的btn是有阴影的。</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 轮播图自适应布局样式（大屏尺寸）</div><div class="line">@media screen and (min-width: $screen-sm-min) &#123;</div><div class="line"></div><div class="line">  // 轮播图左右两端向前/后翻页 图标自适应</div><div class="line">  .carousel-control &#123;</div><div class="line">    .glyphicon-chevron-left,</div><div class="line">    .glyphicon-chevron-right,</div><div class="line">    .icon-prev,</div><div class="line">    .icon-next &#123;</div><div class="line">      width: 30px;</div><div class="line">      height: 30px;</div><div class="line">      margin-top: -15px;</div><div class="line">      font-size: 30px;</div><div class="line">    &#125;</div><div class="line">    .glyphicon-chevron-left,</div><div class="line">    .icon-prev &#123;</div><div class="line">      margin-left: -15px;</div><div class="line">    &#125;</div><div class="line">    .glyphicon-chevron-right,</div><div class="line">    .icon-next &#123;</div><div class="line">      margin-right: -15px;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 轮播图字幕自适应</div><div class="line">  .carousel-caption &#123;</div><div class="line">    left: 20%;</div><div class="line">    right: 20%;</div><div class="line">    padding-bottom: 30px;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // 提升圆圈图标底部距离</div><div class="line">  .carousel-indicators &#123;</div><div class="line">    bottom: 20px;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>注①：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens" target="_blank" rel="external">MDN - hyphens </a></li>
+<li>注②：<a href="http://www.w3school.com.cn/cssref/pr_transform.asp" target="_blank" rel="external">W3C - transform</a></li>
+<li>注③：<a href="http://www.w3school.com.cn/cssref/pr_transition.asp" target="_blank" rel="external">W3C - transition</a></li>
+<li>注④：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" rel="external">MDN - @media</a></li>
+<li>注⑤：gradient属性计算规则：熟悉photoShop的人应该知道在设置画布渐变的时候，线性渐变的角度是以圆心为轴心向周围成剃度扩散的。如果不熟悉photoshop，可以看看<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/linear-gradient" target="_blank" rel="external">MDN - linear-gradient</a>的解释，如果不能理解，直接打开photo，创建画布后，添加一个渐变，在设置角度时，很快就能get了。bootstrap中gradient的minxins已经能解决大部分常见渐变背景了。</li>
+<li>注⑥：device-pixel-ratio 设备像素比；待研究。</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sass/" rel="tag">#sass</a>
+          
+            <a href="/tags/bootstrap/" rel="tag">#bootstrap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/20/深度了解bootstrap源码之sass篇（九）/" rel="next" title="深度了解bootstrap源码之sass篇（九）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（九）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+	<div class="ds-thread" data-thread-key="2017/03/02/深度了解bootstrap源码之sass篇（十）/" data-title="深度了解bootstrap源码之sass篇（十）" data-url="http://yoursite.com/2017/03/02/深度了解bootstrap源码之sass篇（十）/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"uhey"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="uhey" />
+          <p class="site-author-name" itemprop="name">uhey</p>
+          <p class="site-description motion-element" itemprop="description">喜欢前端</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://u-hey.com" target="_blank" title="个站">
+                  
+                    <i class="fa fa-desktop"></i>
+                  
+                  个站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/u-hey" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/zan-wu-zan-wu-71" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-heart"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3024639457/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="AnotherHome" target="_blank">AnotherHome</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://guowenfh.github.io" title="三省吾身" target="_blank">三省吾身</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.bananau.com" title="香蕉U" target="_blank">香蕉U</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ghostsf.com" title="ghostsf" target="_blank">ghostsf</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ludongdong.com" title="卢东东" target="_blank">卢东东</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.chengfeilong.com" title="Scott's Blog" target="_blank">Scott's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="daphne's Blog" target="_blank">daphne's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://daphnechang.github.io" title="花花丹" target="_blank">花花丹</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.qingzhui.net/" title="青雅" target="_blank">青雅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例图与使用方法"><span class="nav-number">3.</span> <span class="nav-text">示例图与使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vendor-prefixes-scss"><span class="nav-number">4.</span> <span class="nav-text">_vendor-prefixes.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#opacity-scss"><span class="nav-number">5.</span> <span class="nav-text">_opacity.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gradients-scss"><span class="nav-number">6.</span> <span class="nav-text">_gradients.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#image-scss"><span class="nav-number">7.</span> <span class="nav-text">_image.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#carousel-scss"><span class="nav-number">8.</span> <span class="nav-text">carousel.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">9.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">uhey</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
