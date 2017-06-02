@@ -82,18 +82,22 @@
 
 
 
-<meta name="description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
+<meta name="description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
+研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
+print.scss  源文：  123456789101112131415161718192021">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度了解bootstrap源码之sass篇（一）">
-<meta property="og:url" content="http://yoursite.com/2016/07/29/深度了解bootstrap源码之sass篇（一）/index.html">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（十三）">
+<meta property="og:url" content="http://yoursite.com/2017/06/03/深度了解bootstrap源码之sass篇（十三）/index.html">
 <meta property="og:site_name" content="uhey">
-<meta property="og:description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
-<meta property="og:image" content="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg">
-<meta property="og:updated_time" content="2016-07-29T12:26:36.000Z">
+<meta property="og:description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
+研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
+print.scss  源文：  123456789101112131415161718192021">
+<meta property="og:updated_time" content="2017-06-02T16:33:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（一）">
-<meta name="twitter:description" content="框架版本：3.3.5下载项目：Sass路径：assets/stylesheets/bootstrap/">
-<meta name="twitter:image" content="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（十三）">
+<meta name="twitter:description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
+研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
+print.scss  源文：  123456789101112131415161718192021">
 
 
 
@@ -111,7 +115,7 @@
   };
 </script>
 
-  <title> 深度了解bootstrap源码之sass篇（一） | uhey </title>
+  <title> 深度了解bootstrap源码之sass篇（十三） | uhey </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +255,7 @@
             
             
               
-                深度了解bootstrap源码之sass篇（一）
+                深度了解bootstrap源码之sass篇（十三）
               
             
           </h1>
@@ -263,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-29T20:25:15+08:00" content="2016-07-29">
-              2016-07-29
+            <time itemprop="dateCreated" datetime="2017-06-03T00:26:31+08:00" content="2017-06-03">
+              2017-06-03
             </time>
           </span>
 
@@ -291,316 +295,31 @@
       
 
       
-        <p>框架版本：3.3.5<br>下载项目：Sass<br>路径：assets/stylesheets/bootstrap/</p>
-<a id="more"></a>
-<hr>
-<h2 id="sass架构和文件说明"><a href="#sass架构和文件说明" class="headerlink" title="sass架构和文件说明"></a>sass架构和文件说明</h2><p><img src="http://u-hey.com/wp-content/uploads/2016/07/BSsass.jpg" alt="sass架构示意图"></p>
-<h3 id="初步了解"><a href="#初步了解" class="headerlink" title="初步了解"></a>初步了解</h3><p>架构图解说：mixins文件包里放置已写好的<strong>函数</strong>、对应各个组件的<strong>样式属性与方法</strong>、其中包括<strong>兼容处理</strong>、<strong>浏览器默认样式清除</strong>，<strong>多端响应处理</strong>等。<br>bootatrap文件包里除了mixins以外还有各组件，比如按钮、表单、布局、列表等，其中框架的所有变量也在_variable.scss中。</p>
-<p>bs是一个整体，mixins是每个部件所需要的材料，与mixins同级的sass文件则是各个封装完整的实例，可单独使用。</p>
-<h3 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">文件名.scss</th>
-<th>文件说明(简述)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">_alert</td>
-<td>警告框</td>
-</tr>
-<tr>
-<td style="text-align:left">_badges</td>
-<td>徽章</td>
-</tr>
-<tr>
-<td style="text-align:left">_breadcrumb</td>
-<td>面包屑</td>
-</tr>
-<tr>
-<td style="text-align:left">_btn-group</td>
-<td>按钮组</td>
-</tr>
-<tr>
-<td style="text-align:left">_buttons</td>
-<td>按钮</td>
-</tr>
-<tr>
-<td style="text-align:left">_carousel</td>
-<td>轮播</td>
-</tr>
-<tr>
-<td style="text-align:left">_close</td>
-<td>关闭按钮图标</td>
-</tr>
-<tr>
-<td style="text-align:left">_code</td>
-<td>代码块（samp,pre,kbd等）</td>
-</tr>
-<tr>
-<td style="text-align:left">_Component animations</td>
-<td>fade效果（常见如触发模态框时模态渐入效果）</td>
-</tr>
-<tr>
-<td style="text-align:left">_dropdowns</td>
-<td>下拉（可与导航、按钮组、列表标签配合使用，还可嵌套使用）</td>
-</tr>
-<tr>
-<td style="text-align:left">_forms</td>
-<td>表单（集合了单复选、图例、字段级、文本、输入框、标签、选择器等）</td>
-</tr>
-<tr>
-<td style="text-align:left">_glyphicon</td>
-<td>框架自带字体图标</td>
-</tr>
-<tr>
-<td style="text-align:left">_gird</td>
-<td>网格（row和container已经它们的自适应处理）</td>
-</tr>
-<tr>
-<td style="text-align:left">_input-group</td>
-<td>输入组（输入框与按钮、插件、图标的搭配）</td>
-</tr>
-<tr>
-<td style="text-align:left">_Jumbotron</td>
-<td>超大容器（官网首页那个大巨幕就是这货的杰作）</td>
-</tr>
-<tr>
-<td style="text-align:left">_label</td>
-<td>标签（与forms里的label不同在于，forms的lable侧重于信息选择，没有皮肤和尺寸。而这个侧重于信息传达，分皮肤和尺寸。）</td>
-</tr>
-<tr>
-<td style="text-align:left">_list-groups</td>
-<td>列表组（常见于面板内的列表信息）</td>
-</tr>
-<tr>
-<td style="text-align:left">_media</td>
-<td>媒体对象（常见于消息展示，留言评论）</td>
-</tr>
-<tr>
-<td style="text-align:left">_mixins</td>
-<td>打包mixins文件夹内的所有文件</td>
-</tr>
-<tr>
-<td style="text-align:left">_modals</td>
-<td>模态框</td>
-</tr>
-<tr>
-<td style="text-align:left">_navbar</td>
-<td>导航条（用于顶部或底部导航）</td>
-</tr>
-<tr>
-<td style="text-align:left">_navs</td>
-<td>导航组（用于菜单、tab选项卡）</td>
-</tr>
-<tr>
-<td style="text-align:left">_normalize</td>
-<td>文本标签规范（描述类文本）</td>
-</tr>
-<tr>
-<td style="text-align:left">_pager</td>
-<td>文本页（描述类文本）</td>
-</tr>
-<tr>
-<td style="text-align:left">_pagination</td>
-<td>分页</td>
-</tr>
-<tr>
-<td style="text-align:left">_panels</td>
-<td>面板与面板组</td>
-</tr>
-<tr>
-<td style="text-align:left">_popover</td>
-<td>弹出框</td>
-</tr>
-<tr>
-<td style="text-align:left">_print</td>
-<td>打印样式（包含h5样式规范和文档类标签规范）</td>
-</tr>
-<tr>
-<td style="text-align:left">_progress-bars</td>
-<td>进度条</td>
-</tr>
-<tr>
-<td style="text-align:left">_responsive-embed</td>
-<td>嵌入反应（对iframe,vedia,object等类嵌入的样式规范）</td>
-</tr>
-<tr>
-<td style="text-align:left">_responsive-utilities</td>
-<td>程序类嵌入响应式处理（含尺寸）</td>
-</tr>
-<tr>
-<td style="text-align:left">_scaffolding</td>
-<td>三方样式冲突处理（含多端处理）</td>
-</tr>
-<tr>
-<td style="text-align:left">_table</td>
-<td>表格</td>
-</tr>
-<tr>
-<td style="text-align:left">_theme</td>
-<td>各组件的配色（引入了所有变量和打包的mixins）</td>
-</tr>
-<tr>
-<td style="text-align:left">_thumbnail</td>
-<td>略缩图</td>
-</tr>
-<tr>
-<td style="text-align:left">_tooltips</td>
-<td>工具提示</td>
-</tr>
-<tr>
-<td style="text-align:left">_type</td>
-<td>排版（含各种文本、例如大小号、对齐、略缩语、地址等文本）</td>
-</tr>
-<tr>
-<td style="text-align:left">_utilities</td>
-<td>内容细节处理（含clearfix、hide/show、pull-left/right等）</td>
-</tr>
-<tr>
-<td style="text-align:left">_variables</td>
-<td>所有组件变量</td>
-</tr>
-<tr>
-<td style="text-align:left">_wells</td>
-<td>类似于消息面板（类似但不是情景背景色和警告框）</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">mixin下的.scss</th>
-<th>文件说明(简述)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">_alert</td>
-<td>警告框的代码块（代码块：通过@mixin 定义的函数。即代表<strong>可重用的代码块</strong>）</td>
-</tr>
-<tr>
-<td style="text-align:left">_background-variant</td>
-<td>情景色代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_border-radius</td>
-<td>边的半径代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_buttons</td>
-<td>按钮代码块，含尺寸响应</td>
-</tr>
-<tr>
-<td style="text-align:left">_center-block</td>
-<td>定义一个行标签的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_clearfix</td>
-<td>清除浮动的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_forms</td>
-<td>表单和表单组的公共代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_gradients</td>
-<td>渐变</td>
-</tr>
-<tr>
-<td style="text-align:left">_gird</td>
-<td>布局间距处理的代码块（用于网格布局）</td>
-</tr>
-<tr>
-<td style="text-align:left">_gird-framework</td>
-<td>生成网格布局</td>
-</tr>
-<tr>
-<td style="text-align:left">_hide-text</td>
-<td>文本隐藏（将在bootstrap4中删除）</td>
-</tr>
-<tr>
-<td style="text-align:left">_image</td>
-<td>图片和其<strong>响应式</strong>处理（强调一下自适应和响应式不是同一个概念）</td>
-</tr>
-<tr>
-<td style="text-align:left">_labers</td>
-<td>laber标签用的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_list-group</td>
-<td>列表组通用代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_nav-divider</td>
-<td>用于下拉和导航列表（水平分割）</td>
-</tr>
-<tr>
-<td style="text-align:left">_nav-vertical-align</td>
-<td>计算元素垂直居中，用于导航栏</td>
-</tr>
-<tr>
-<td style="text-align:left">_opacity</td>
-<td>透明度（含其IE兼容处理）</td>
-</tr>
-<tr>
-<td style="text-align:left">_pagination</td>
-<td>分页的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_panels</td>
-<td>面板代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_progress-bar</td>
-<td>进度条代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_reset-filters</td>
-<td>图片透明处理（用于IE兼容的）</td>
-</tr>
-<tr>
-<td style="text-align:left">_reset-text</td>
-<td>初始化文本类型样式属性的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_resize</td>
-<td>调整大小（css3属性，元素尺寸调整）</td>
-</tr>
-<tr>
-<td style="text-align:left">_responsive-visibility</td>
-<td>响应处理（含表格标签的hack）</td>
-</tr>
-<tr>
-<td style="text-align:left">_size</td>
-<td>定义盒子宽高</td>
-</tr>
-<tr>
-<td style="text-align:left">_tab-focus</td>
-<td>触发outline的兼容处理。注释上声明是只用于webkit内核的浏览器的兼容处理。具体还用在哪些地方需要再研究。</td>
-</tr>
-<tr>
-<td style="text-align:left">_table-row</td>
-<td>将table转化为row(网格)，并防止不规范的表格嵌套。</td>
-</tr>
-<tr>
-<td style="text-align:left">_text-emphasis</td>
-<td>文本强调转换代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_text-overflow</td>
-<td>文本强制一行的代码块</td>
-</tr>
-<tr>
-<td style="text-align:left">_vendor-prefixes</td>
-<td>集合了所有需要写内核兼容的css属性，并生成代码块。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="缺失的说明"><a href="#缺失的说明" class="headerlink" title="缺失的说明"></a>缺失的说明</h3><ul>
-<li>bootstrap-compass.scss</li>
-<li>bootstrap-mincer.scss</li>
-<li>bootstrap-sprockets.scss</li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习print(当前是打印预览模式的打印页样式)。</p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。</p>
+<h2 id="print-scss"><a href="#print-scss" class="headerlink" title="print.scss"></a>print.scss</h2><p>  源文：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">  /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */</div><div class="line"></div><div class="line">// ==========================================================================</div><div class="line">// Print styles.</div><div class="line">// 内联函数 避免额外的http请求</div><div class="line">// ==========================================================================</div><div class="line"></div><div class="line">@media print &#123;</div><div class="line">    *,</div><div class="line">    *:before,</div><div class="line">    *:after &#123;</div><div class="line">        background: transparent !important;</div><div class="line">        color: #000 !important; // 黑色字访问输出更快</div><div class="line">        box-shadow: none !important;</div><div class="line">        text-shadow: none !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    a,</div><div class="line">    a:visited &#123;</div><div class="line">        text-decoration: underline;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    a[href]:after &#123;</div><div class="line">        content: &quot; (&quot; attr(href) &quot;)&quot;;  // 字面理解是 获取href的值。但是我印象里sass没有attr函数啊</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    abbr[title]:after &#123;</div><div class="line">        content: &quot; (&quot; attr(title) &quot;)&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 不显示片段标识符的链接，</div><div class="line">    // 或者使用&apos;javascript&apos;:伪协议</div><div class="line"></div><div class="line">    a[href^=&quot;#&quot;]:after,</div><div class="line">    a[href^=&quot;javascript:&quot;]:after &#123;</div><div class="line">        content: &quot;&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    pre,</div><div class="line">    blockquote &#123; // blockquote标签拥有浏览器默认样式，包含(外边距和标记了块元素)</div><div class="line">        border: 1px solid #999;</div><div class="line">        page-break-inside: avoid; // 避免在元素内部插入分页符。该属性仅支持Oprea，默认值为auto(允许元素内部插入分页符)，还有一个值是inherid.</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    thead &#123; // 定义表格的表头，通常和tbody,tfood配合使用</div><div class="line">        display: table-header-group; //  注②，作为一个或多个行的分组来显示：h5bp.com/t</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    tr,</div><div class="line">    img &#123;</div><div class="line">        page-break-inside: avoid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    img &#123;</div><div class="line">        max-width: 100% !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    p,</div><div class="line">    h2,</div><div class="line">    h3 &#123; // 一下俩属性都是打印(print)属性</div><div class="line">        orphans: 3; // 当元素内部发生分页时必须在页面底部保留最少3行。</div><div class="line">        widows: 3; // 当元素内部发生分页时必须在页面顶部保留最少3行</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    h2,</div><div class="line">    h3 &#123;</div><div class="line">        page-break-after: avoid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Bootstrap组件在print模式下的调整</div><div class="line">    //</div><div class="line">    // 有关chorme样式修复链接://github.com/twbs/bootstrap/issues/11245</div><div class="line">    // 一旦确定，这段样式会被删除</div><div class="line">    select &#123;</div><div class="line">        background: #fff !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Bootstrap 组件样式调整</div><div class="line">    .navbar &#123;</div><div class="line">        display: none;</div><div class="line">    &#125;</div><div class="line">    .btn,</div><div class="line">    .dropup &gt; .btn &#123;</div><div class="line">        &gt; .caret &#123;</div><div class="line">            border-top-color: #000 !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .label &#123;</div><div class="line">        border: 1px solid #000;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    .table &#123;</div><div class="line">        border-collapse: collapse !important;</div><div class="line"></div><div class="line">        td,</div><div class="line">        th &#123;</div><div class="line">            background-color: #fff !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .table-bordered &#123;</div><div class="line">        th,</div><div class="line">        td &#123;</div><div class="line">            border: 1px solid #ddd !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 调整结束</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
+<li>注①： <a href="http://www.w3school.com.cn/tags/att_style_media.asp" target="_blank" rel="external">media 属性</a><ul>
+<li>html的style下用法： media = “print”</li>
+<li>css的style下用法： @media print {}</li>
+<li>media有以下值：<ul>
+<li>screen    计算机屏幕（默认值）。</li>
+<li>tty    电传打字机以及使用等宽字符网格的类似媒介。</li>
+<li>tv    电视类型设备（低分辨率、有限的屏幕翻滚能力）。</li>
+<li>projection    放映机。</li>
+<li>handheld    手持设备（小屏幕、有限的带宽）。</li>
+<li>print    打印预览模式 / 打印页。</li>
+<li>braille    盲人用点字法反馈设备。</li>
+<li>aural    语音合成器。</li>
+<li>all    适合所有设备。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注②：<a href="http://www.w3school.com.cn/cssref/pr_class_display.asp" target="_blank" rel="external">全面了解display属性值</a> <ul>
+<li><a href="">这是一篇研究display的博文,尚未完成</a> </li>
+</ul>
+</li>
 </ul>
 
       
@@ -633,16 +352,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/27/关于bootstrap框架里media类的解析/" rel="next" title="关于bootstrap框架里media类的解析">
-                <i class="fa fa-chevron-left"></i> 关于bootstrap框架里media类的解析
+              <a href="/2017/05/21/深度了解bootstrap源码之sass篇（十二）/" rel="next" title="深度了解bootstrap源码之sass篇（十二）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（十二）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/04/深度了解bootstrap源码之sass篇（二）/" rel="prev" title="深度了解bootstrap源码之sass篇（二）">
-                深度了解bootstrap源码之sass篇（二） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/03/深度了解bootstrap源码之sass篇（十四）/" rel="prev" title="深度了解bootstrap源码之sass篇（十四）">
+                深度了解bootstrap源码之sass篇（十四） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -668,7 +387,7 @@
 
           
   <div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="2016/07/29/深度了解bootstrap源码之sass篇（一）/" data-title="深度了解bootstrap源码之sass篇（一）" data-url="http://yoursite.com/2016/07/29/深度了解bootstrap源码之sass篇（一）/"></div>
+	<div class="ds-thread" data-thread-key="2017/06/03/深度了解bootstrap源码之sass篇（十三）/" data-title="深度了解bootstrap源码之sass篇（十三）" data-url="http://yoursite.com/2017/06/03/深度了解bootstrap源码之sass篇（十三）/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"uhey"};
 	(function() {
@@ -851,7 +570,7 @@ var duoshuoQuery = {short_name:"uhey"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sass架构和文件说明"><span class="nav-number">1.</span> <span class="nav-text">sass架构和文件说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初步了解"><span class="nav-number">1.1.</span> <span class="nav-text">初步了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件说明"><span class="nav-number">1.2.</span> <span class="nav-text">文件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺失的说明"><span class="nav-number">1.3.</span> <span class="nav-text">缺失的说明</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print-scss"><span class="nav-number">3.</span> <span class="nav-text">print.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">4.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
             
           </div>
         </section>
