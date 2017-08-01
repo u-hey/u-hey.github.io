@@ -82,22 +82,21 @@
 
 
 
-<meta name="description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
-研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
-print.scss  源文：  123456789101112131415161718192021">
+<meta name="description" content="前言 这篇文章主要研究_progress-bars.scss(进度条)。该文章解析了bs框架是如何实现一个带有滚动效果的条纹状进度条，描述其实现过程，并总结实现步骤。
+研究对象 _progress-bars.scss；该组件在3.2.0版本后增入了几个比较酷炫的css3属性，keyframe，animation，linear-gradient。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度了解bootstrap源码之sass篇（十三）">
-<meta property="og:url" content="http://yoursite.com/2017/06/03/深度了解bootstrap源码之sass篇（十三）/index.html">
+<meta property="og:title" content="深度了解bootstrap源码之sass篇（十六）">
+<meta property="og:url" content="http://yoursite.com/2017/07/31/深度了解bootstrap源码之sass篇（十六）/index.html">
 <meta property="og:site_name" content="uhey">
-<meta property="og:description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
-研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
-print.scss  源文：  123456789101112131415161718192021">
-<meta property="og:updated_time" content="2017-06-02T16:33:58.000Z">
+<meta property="og:description" content="前言 这篇文章主要研究_progress-bars.scss(进度条)。该文章解析了bs框架是如何实现一个带有滚动效果的条纹状进度条，描述其实现过程，并总结实现步骤。
+研究对象 _progress-bars.scss；该组件在3.2.0版本后增入了几个比较酷炫的css3属性，keyframe，animation，linear-gradient。">
+<meta property="og:image" content="http://7xtha5.com1.z0.glb.clouddn.com/progress-bar-striped.jpg">
+<meta property="og:updated_time" content="2017-08-01T13:35:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（十三）">
-<meta name="twitter:description" content="前言 这一章主要学习print(当前是打印预览模式的打印页样式)。
-研究对象 print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。
-print.scss  源文：  123456789101112131415161718192021">
+<meta name="twitter:title" content="深度了解bootstrap源码之sass篇（十六）">
+<meta name="twitter:description" content="前言 这篇文章主要研究_progress-bars.scss(进度条)。该文章解析了bs框架是如何实现一个带有滚动效果的条纹状进度条，描述其实现过程，并总结实现步骤。
+研究对象 _progress-bars.scss；该组件在3.2.0版本后增入了几个比较酷炫的css3属性，keyframe，animation，linear-gradient。">
+<meta name="twitter:image" content="http://7xtha5.com1.z0.glb.clouddn.com/progress-bar-striped.jpg">
 
 
 
@@ -115,7 +114,7 @@ print.scss  源文：  123456789101112131415161718192021">
   };
 </script>
 
-  <title> 深度了解bootstrap源码之sass篇（十三） | uhey </title>
+  <title> 深度了解bootstrap源码之sass篇（十六） | uhey </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -255,7 +254,7 @@ print.scss  源文：  123456789101112131415161718192021">
             
             
               
-                深度了解bootstrap源码之sass篇（十三）
+                深度了解bootstrap源码之sass篇（十六）
               
             
           </h1>
@@ -267,8 +266,8 @@ print.scss  源文：  123456789101112131415161718192021">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-03T00:26:31+08:00" content="2017-06-03">
-              2017-06-03
+            <time itemprop="dateCreated" datetime="2017-07-31T21:48:12+08:00" content="2017-07-31">
+              2017-07-31
             </time>
           </span>
 
@@ -295,29 +294,26 @@ print.scss  源文：  123456789101112131415161718192021">
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这一章主要学习print(当前是打印预览模式的打印页样式)。</p>
-<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> print.scss；bootstrap的初始化依赖样式表有三个、分别是normalize、print、glyphicons。normalize标签标准化，print打印预览页模式样式，glyphicons字体图标规范。</p>
-<h2 id="print-scss"><a href="#print-scss" class="headerlink" title="print.scss"></a>print.scss</h2><p>  源文：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">  /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */</div><div class="line"></div><div class="line">// ==========================================================================</div><div class="line">// Print styles.</div><div class="line">// 内联函数 避免额外的http请求</div><div class="line">// ==========================================================================</div><div class="line"></div><div class="line">@media print &#123;</div><div class="line">    *,</div><div class="line">    *:before,</div><div class="line">    *:after &#123;</div><div class="line">        background: transparent !important;</div><div class="line">        color: #000 !important; // 黑色字访问输出更快</div><div class="line">        box-shadow: none !important;</div><div class="line">        text-shadow: none !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    a,</div><div class="line">    a:visited &#123;</div><div class="line">        text-decoration: underline;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    a[href]:after &#123;</div><div class="line">        content: &quot; (&quot; attr(href) &quot;)&quot;;  // 字面理解是 获取href的值。但是我印象里sass没有attr函数啊</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    abbr[title]:after &#123;</div><div class="line">        content: &quot; (&quot; attr(title) &quot;)&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 不显示片段标识符的链接，</div><div class="line">    // 或者使用&apos;javascript&apos;:伪协议</div><div class="line"></div><div class="line">    a[href^=&quot;#&quot;]:after,</div><div class="line">    a[href^=&quot;javascript:&quot;]:after &#123;</div><div class="line">        content: &quot;&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    pre,</div><div class="line">    blockquote &#123; // blockquote标签拥有浏览器默认样式，包含(外边距和标记了块元素)</div><div class="line">        border: 1px solid #999;</div><div class="line">        page-break-inside: avoid; // 避免在元素内部插入分页符。该属性仅支持Oprea，默认值为auto(允许元素内部插入分页符)，还有一个值是inherid.</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    thead &#123; // 定义表格的表头，通常和tbody,tfood配合使用</div><div class="line">        display: table-header-group; //  注②，作为一个或多个行的分组来显示：h5bp.com/t</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    tr,</div><div class="line">    img &#123;</div><div class="line">        page-break-inside: avoid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    img &#123;</div><div class="line">        max-width: 100% !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    p,</div><div class="line">    h2,</div><div class="line">    h3 &#123; // 一下俩属性都是打印(print)属性</div><div class="line">        orphans: 3; // 当元素内部发生分页时必须在页面底部保留最少3行。</div><div class="line">        widows: 3; // 当元素内部发生分页时必须在页面顶部保留最少3行</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    h2,</div><div class="line">    h3 &#123;</div><div class="line">        page-break-after: avoid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Bootstrap组件在print模式下的调整</div><div class="line">    //</div><div class="line">    // 有关chorme样式修复链接://github.com/twbs/bootstrap/issues/11245</div><div class="line">    // 一旦确定，这段样式会被删除</div><div class="line">    select &#123;</div><div class="line">        background: #fff !important;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Bootstrap 组件样式调整</div><div class="line">    .navbar &#123;</div><div class="line">        display: none;</div><div class="line">    &#125;</div><div class="line">    .btn,</div><div class="line">    .dropup &gt; .btn &#123;</div><div class="line">        &gt; .caret &#123;</div><div class="line">            border-top-color: #000 !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .label &#123;</div><div class="line">        border: 1px solid #000;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    .table &#123;</div><div class="line">        border-collapse: collapse !important;</div><div class="line"></div><div class="line">        td,</div><div class="line">        th &#123;</div><div class="line">            background-color: #fff !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    .table-bordered &#123;</div><div class="line">        th,</div><div class="line">        td &#123;</div><div class="line">            border: 1px solid #ddd !important;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 调整结束</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 这篇文章主要研究_progress-bars.scss(进度条)。该文章解析了bs框架是如何实现一个带有滚动效果的条纹状进度条，描述其实现过程，并总结实现步骤。</p>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><p> _progress-bars.scss；该组件在3.2.0版本后增入了几个比较酷炫的css3属性，keyframe，animation，linear-gradient。<br> <a id="more"></a></p>
+<h2 id="progress-bars-scss"><a href="#progress-bars-scss" class="headerlink" title="_progress-bars.scss"></a>_progress-bars.scss</h2><p>  源文：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">  //</div><div class="line">// 进度条</div><div class="line">// --------------------------------------------------</div><div class="line"></div><div class="line"></div><div class="line">// 进度条动画</div><div class="line">// -------------------------</div><div class="line"></div><div class="line">// WebKit</div><div class="line">@-webkit-keyframes progress-bar-stripes &#123;</div><div class="line">  from  &#123; background-position: 40px 0; &#125;</div><div class="line">  to    &#123; background-position: 0 0; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 兼容 IE10+</div><div class="line">@keyframes progress-bar-stripes &#123;</div><div class="line">  from  &#123; background-position: 40px 0; &#125;</div><div class="line">  to    &#123; background-position: 0 0; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 进度条的“条”</div><div class="line">// -------------------------</div><div class="line"></div><div class="line">// 进度条容器</div><div class="line">.progress &#123;</div><div class="line">  overflow: hidden;</div><div class="line">  height: $line-height-computed; // ~20px</div><div class="line">  margin-bottom: $line-height-computed;</div><div class="line">  background-color: $progress-bg; // 进度条背景色，默认F5F5F5，浅灰</div><div class="line">  border-radius: $progress-border-radius; // 4px default</div><div class="line">  @include box-shadow(inset 0 1px 2px rgba(0,0,0,.1)); // 淡淡的阴影</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 进度条</div><div class="line">.progress-bar &#123;</div><div class="line">  float: left;</div><div class="line">  width: 0%; // 进度条初始进度</div><div class="line">  height: 100%;</div><div class="line">  font-size: $font-size-small;</div><div class="line">  line-height: $line-height-computed;</div><div class="line">  color: $progress-bar-color; // #fff default</div><div class="line">  text-align: center; // 这个居中是当前元素宽度的中间。</div><div class="line">  background-color: $progress-bar-bg;</div><div class="line">  @include box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));</div><div class="line">  @include transition(width .6s ease);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 带条纹渐变样式的进度条</div><div class="line">//</div><div class="line">// 该样式是在3.2.0版本被加入的，仅该版本及以上支持；</div><div class="line">// 条纹渐变进度条的核心样式名为`.progress-bar-striped`，依赖进度条核心样式`.progress-bar`；</div><div class="line">//</div><div class="line">.progress-striped .progress-bar,</div><div class="line">.progress-bar-striped &#123;</div><div class="line">  @include gradient-striped; // 注① 用linear-gradient实现条纹样式解析。</div><div class="line">  background-size: 40px 40px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 有条纹动画效果的进度条，</div><div class="line">//</div><div class="line">// bs框架定义样式名为active配合progress-bar使用，</div><div class="line">// 实现方式：用keyframe改变backgroung-position的值达到动画效果。</div><div class="line">// 实现步骤：制作一个条纹(1：定义一个背景色，2：定义一个覆盖在背景色上的渐变画布 3：在渐变画布上设置一个带透明度的颜色区域，4：定义渐变画布的尺寸)，然后移动背景色的位置。很实用的技巧，get！</div><div class="line">.progress.active .progress-bar,</div><div class="line">.progress-bar.active &#123;</div><div class="line">  @include animation(progress-bar-stripes 2s linear infinite);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 场景定制化</div><div class="line">// -------------------------</div><div class="line"></div><div class="line">.progress-bar-success &#123;</div><div class="line">  @include progress-bar-variant($progress-bar-success-bg);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.progress-bar-info &#123;</div><div class="line">  @include progress-bar-variant($progress-bar-info-bg);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.progress-bar-warning &#123;</div><div class="line">  @include progress-bar-variant($progress-bar-warning-bg);</div><div class="line">&#125;</div><div class="line"></div><div class="line">.progress-bar-danger &#123;</div><div class="line">  @include progress-bar-variant($progress-bar-danger-bg);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h2><ul>
-<li>注①： <a href="http://www.w3school.com.cn/tags/att_style_media.asp" target="_blank" rel="external">media 属性</a><ul>
-<li>html的style下用法： media = “print”</li>
-<li>css的style下用法： @media print {}</li>
-<li>media有以下值：<ul>
-<li>screen    计算机屏幕（默认值）。</li>
-<li>tty    电传打字机以及使用等宽字符网格的类似媒介。</li>
-<li>tv    电视类型设备（低分辨率、有限的屏幕翻滚能力）。</li>
-<li>projection    放映机。</li>
-<li>handheld    手持设备（小屏幕、有限的带宽）。</li>
-<li>print    打印预览模式 / 打印页。</li>
-<li>braille    盲人用点字法反馈设备。</li>
-<li>aural    语音合成器。</li>
-<li>all    适合所有设备。</li>
-</ul>
+<li>注①：linear-gradient 线性渐变<ul>
+<li>关于这个属性的用法百度已经很多解释的很全面的了，稍有ps经验的人应该很容易理解，在制作渐变背景的素材时如何过渡颜色。</li>
+<li>在进度条组件中，下图展现了bs中进度条的实现过程。<img src="http://7xtha5.com1.z0.glb.clouddn.com/progress-bar-striped.jpg" alt=""></li>
+<li>由此我们可以总结出条纹制作的步骤：<ol>
+<li>定义一个背景色(background-color)；</li>
+<li>定义一个覆盖在背景色上的渐变画布(background-image)； </li>
+<li>在渐变画布上设置一个带透明度的颜色区域(linear-gradient)；</li>
+<li>定义渐变画布的尺寸(background-size)；</li>
+</ol>
 </li>
-</ul>
+<li>让条纹动起来的实现步骤：<ol>
+<li>制作出一个条纹</li>
+<li>设置一个keyframe，移动背景色(background-position)</li>
+<li>设置一个animation，设置动画名称，执行速度，执行次数。</li>
+</ol>
 </li>
-<li>注②：<a href="http://www.w3school.com.cn/cssref/pr_class_display.asp" target="_blank" rel="external">全面了解display属性值</a> <ul>
-<li><a href="">这是一篇研究display的博文,尚未完成</a> </li>
 </ul>
 </li>
 </ul>
@@ -352,17 +348,13 @@ print.scss  源文：  123456789101112131415161718192021">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/21/深度了解bootstrap源码之sass篇（十二）/" rel="next" title="深度了解bootstrap源码之sass篇（十二）">
-                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（十二）
+              <a href="/2017/07/14/深度了解bootstrap源码之sass篇（十五）/" rel="next" title="深度了解bootstrap源码之sass篇（十五）">
+                <i class="fa fa-chevron-left"></i> 深度了解bootstrap源码之sass篇（十五）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/03/深度了解bootstrap源码之sass篇（十四）/" rel="prev" title="深度了解bootstrap源码之sass篇（十四）">
-                深度了解bootstrap源码之sass篇（十四） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -387,7 +379,7 @@ print.scss  源文：  123456789101112131415161718192021">
 
           
   <div class="comments" id="comments">
-	<div class="ds-thread" data-thread-key="2017/06/03/深度了解bootstrap源码之sass篇（十三）/" data-title="深度了解bootstrap源码之sass篇（十三）" data-url="http://yoursite.com/2017/06/03/深度了解bootstrap源码之sass篇（十三）/"></div>
+	<div class="ds-thread" data-thread-key="2017/07/31/深度了解bootstrap源码之sass篇（十六）/" data-title="深度了解bootstrap源码之sass篇（十六）" data-url="http://yoursite.com/2017/07/31/深度了解bootstrap源码之sass篇（十六）/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"uhey"};
 	(function() {
@@ -570,7 +562,7 @@ var duoshuoQuery = {short_name:"uhey"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#print-scss"><span class="nav-number">3.</span> <span class="nav-text">print.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">4.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">2.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#progress-bars-scss"><span class="nav-number">3.</span> <span class="nav-text">_progress-bars.scss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关说明"><span class="nav-number">4.</span> <span class="nav-text">相关说明</span></a></li></ol></div>
             
           </div>
         </section>
